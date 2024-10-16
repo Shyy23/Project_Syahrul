@@ -17,6 +17,10 @@
      <title>Home</title>
 </head>
 <body>
+    <img src="assets/img/banner.png" alt="image__bg" class="bg__image">
+    <div class="bg__blur"></div>
+        <!-- ================= HEADER ===================== -->
+
     <header class="header" id="header">
         <div class="header__container">
             <a href="" class="header__logo">
@@ -24,15 +28,26 @@
                 <span>cloud</span>
             </a>
 
+            <div class="header__actions">
+                <i class="fa-regular fa-bell"></i>
+                <i class="ri-account-circle-line"></i>
+
             <button class="header__toggle" id="header-toggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
+            </div>
+
         </div>
+
+        <form action="" class="header__search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="search" class="header__input">
+        </form>
     </header>
     <!-- ================= SIDEBAR ===================== -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar__container">
-            <div class="sidebar__user">
+            <div class="sidebar__user b-bot">
                 <div class="sidebar__image">
                     <img src="assets/img/pp.jpg" alt="image" class="sidebar__img">
                 </div>
@@ -46,7 +61,7 @@
             <div class="sidebar__content">
                 <div>
                     <h3 class="sidebar__title">MANAGE</h3>
-                    <div class="sidebar__list">
+                    <div class="sidebar__list b-bot">
                         
                         <a href="#" class="sidebar__link active-link">
                             <i class="fa-solid fa-chart-pie"></i>
@@ -102,9 +117,22 @@
             </div>
         </div>
     </nav>
-    <!-- ============ MAIN ===================== -->
-    <main class="main">
-        <h3>YO whatssap</h3>
+    <!-- ============ MAIN DASHBOARD ===================== -->
+    <main class="main container" id="main">
+        <section class="banner">
+            <article class="banner__card">
+                <a href="" class="banner__link">
+                    <img src="assets/img/banner.png" alt="image__banner" class="banner__img">
+                    <div class="banner__shadow"></div>
+
+                        <div class="banner__data">
+                            <h2 class="banner__title">Lord Of The Mysteries</h2>
+                            <span class="banner__category">Action</span>
+                        </div>
+                    
+                </a>
+            </article>
+        </section>
     </main>
     <!-- ================= FOOTER ===================== -->
     <footer class="footer">
