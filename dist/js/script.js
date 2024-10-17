@@ -58,3 +58,36 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme());
     localStorage.setItem('selected-icon', getCurrentIcon());
 })
+
+/**  ========================= HAMBURGERS ==================================*/
+var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
+
+var hamburgers = document.querySelectorAll(".hamburger");
+if (hamburgers.length > 0) {
+  forEach(hamburgers, function(hamburger) {
+    hamburger.addEventListener("click", function() {
+      this.classList.toggle("is-active");
+    }, false);
+  });
+}
+
+/**  ========================= SWIPER CHAR ==================================*/
+let swiperChar = new Swiper('.char__swiper', {
+    loop: true,
+    grabCursor: true,
+    slidesPerView: 2,
+    spaceBetween: 24,
+
+    breakpoints:{
+        440:{
+            slidesPerView: 'auto',
+        },
+        768:{
+            slidesPerView: 4,
+        },
+        1200:{
+            slidesPerView: 5,
+        }
+        
+    }
+  });

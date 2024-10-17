@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <!-- ================= REMIXICON ===================== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    
+    <!-- ================= Hamburgers ===================== -->
+    <link rel="stylesheet" href="dist/css/hamburgers.css">
+
+     <!-- ================= SWIPER CSS ===================== -->
+     <link rel="stylesheet" href="dist/css/swiper-bundle.min.css">
 
      <!-- ================= CSS ===================== -->
      <link rel="stylesheet" href="dist/css/style.css">
@@ -32,9 +38,11 @@
                 <i class="fa-regular fa-bell"></i>
                 <i class="ri-account-circle-line"></i>
 
-            <button class="header__toggle" id="header-toggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+                <button class="hamburger hamburger--elastic header__toggle" type="button" id="header-toggle">
+                    <span class="hamburger-box">
+                      <span class="hamburger-inner"></span>
+                    </span>
+                  </button>
             </div>
 
         </div>
@@ -127,11 +135,103 @@
 
                         <div class="banner__data">
                             <h2 class="banner__title">Lord Of The Mysteries</h2>
-                            <span class="banner__category">Action</span>
+                            <span class="banner__category">Action Mystery Fantasy</span>
                         </div>
                     
                 </a>
             </article>
+        </section>
+
+        <section class="characters">
+            <h3 class="card__title">Character</h3>
+
+            <div class="char__swiper swiper">
+                <div class="swiper-wrapper">
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Moretti.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name">Moretti</h3>
+                                <span class="card__category">MC</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Cattleya.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name"> Catlleya</h3>
+                                <span class="card__category">The Hermit</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Leonard.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name">Leonard</h3>
+                                <span class="card__category">The Star</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Fors.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name">Fors Wall</h3>
+                                <span class="card__category">The Magician</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Dwayne.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name">Dwayne</h3>
+                                <span class="card__category">Deputy Director</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+
+                    <article class="card__article swiper-slide">
+                        <a href="#" class="card__link">
+                            <img src="assets/img/Audrey.webp" alt="image" class="card__img">
+                            <div class="card__shadow"></div>
+
+                            <div class="card__data">
+                                <h3 class="card__name">Audrey Hall</h3>
+                                <span class="card__category">Justice</span>
+                            </div>
+
+                            <i class="fa-regular fa-heart card__like"></i>
+                        </a>
+                    </article>
+                </div>
+            </div>
         </section>
     </main>
     <!-- ================= FOOTER ===================== -->
@@ -141,6 +241,11 @@
     <!-- ================= SCROLL UP ===================== -->
 
     <!-- ================= SCROLL REVEAL ===================== -->
+
+    <!-- ================= SWIPER JS ===================== -->
+    <script src="dist/js/swiper-bundle.min.js"></script>
+
+    <!-- ================= MAIN js ===================== -->
     <script src="dist/js/script.js"></script>
 </body>
 </html>
