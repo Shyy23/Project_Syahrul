@@ -20,11 +20,36 @@ CREATE TABLE siswa (
     `password` VARCHAR(255) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
+-- Dumping data for table `siswa`
 INSERT INTO siswa (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `id_kelas`, `no_telepon`, `password`) VALUES
 (33, '00000', 'Syahrul Hidayatulloh', 'L', '-', '11', '-', 'abcdefghij');
 
--- Dumping data for table `siswa`
+-- Table structure for table `user`
+CREATE TABLE user (
+    `id_user` INT PRIMARY KEY AUTO_INCREMENT,
+    `nama` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `level` ENUM('admin', 'user') NOT NULL, -- Misalnya level dapat berupa 'admin' atau 'user'
+    `id` INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table `user`
+INSERT INTO user(`id_user`, `nama`, `password`, `level`, `id`) VALUES
+(1, 'Shyy', 'abcdefg', 'admin', 2);
+
+-- Table structure for table `guru`
+CREATE TABLE guru (
+    `id_guru` INT PRIMARY KEY AUTO_INCREMENT,
+    `nip` VARCHAR(20) NOT NULL UNIQUE,
+    `nama` VARCHAR(100) NOT NULL,
+    `jenis_kelamin` ENUM('L', 'P') NOT NULL,
+    `alamat` TEXT NOT NULL,
+    `password` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table `Guru`
+INSERT INTO guru(`id_guru`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VALUES
+(1, '22334455', 'Fulan', 'L', '-', '12345')
 
 
 
