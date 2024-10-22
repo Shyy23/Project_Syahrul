@@ -91,3 +91,33 @@ let swiperChar = new Swiper('.char__swiper', {
         
     }
   });
+
+/**  ========================= SWIPER PATH ==================================*/
+let swiperPath = new Swiper('.path__swiper', {
+    loop: true,
+    grabCursor: true,
+    slidesPerView: 2,
+    centeredSlides: true,
+
+    // Pagination
+    pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    },
+
+    breakpoints:{
+        440:{
+            slidesPerView: 'auto',
+            
+        },
+        768:{
+            slidesPerView: 4,
+            centeredSlides: false,
+        },
+        1200:{
+            slidesPerView: 5,
+            centeredSlides: false,
+        }
+        
+    }
+  });

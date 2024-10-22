@@ -1,0 +1,10 @@
+.slide-wrapper{
+    width: 100px; /*Samain dengan ukuran slidesnya*/
+    height: 150px; /*Samain dengan ukuran slidesnya*/
+    overflow: hidden;
+}
+
+.slides{
+    width: 100px;
+    height: 150px;
+}

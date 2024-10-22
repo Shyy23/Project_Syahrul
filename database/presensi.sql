@@ -49,7 +49,7 @@ CREATE TABLE guru (
 
 -- Dumping data for table `Guru`
 INSERT INTO guru(`id_guru`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VALUES
-(1, '22334455', 'Fulan', 'L', '-', '12345')
+(1, '22334455', 'Fulan', 'L', '-', '12345');
 
 
 
