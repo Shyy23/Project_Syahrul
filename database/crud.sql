@@ -49,6 +49,14 @@ CREATE TABLE `siswa` (
 -- Create Index
 CREATE INDEX idx_nama ON siswa (nama);
 
+-- Function hash password SHA-256
+CREATE FUNCTION hash_password(input_password VARCHAR(255))
+RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+RETURN SHA2(input_password, 256)
+END;
+
 -- Create Procedure
 CREATE PROCEDURE tambah_siswa (
     IN nama_siswa VARCHAR(100), 
@@ -60,7 +68,7 @@ CREATE PROCEDURE tambah_siswa (
     IN password_siswa VARCHAR(255)
 )
 BEGIN
-    INSERT INTO siswa (nama, nisn, jenis_kelamin, alamat, kelas, no_telepon, password) 
+    INSERT INTO siswa (nama, nisn, jenis_kelamin, alamat, kelas, no_telepon, hash_password(password)) 
     VALUES (nama_siswa, nisn_siswa, jenis_kelamin_siswa, alamat_siswa, kelas_siswa, no_telepon_siswa, password_siswa);
 END;
 
@@ -75,19 +83,26 @@ FROM
     siswa;
     
 -- Create Insert dumping siswa
-INSERT INTO `siswa` (nama, nisn, jenis_kelamin, alamat, kelas, no_telepon, password) VALUES
-('Syahrul', '009383221', 'L', 'Kp.Cempaka', '10', '08569223092','testing' )
+
+INSERT INTO `siswa` (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `kelas`, `no_telepon`, `password`) VALUES
+(1, '909290187', 'syahrul', 'L', 'cempaka', '11', '083820103522', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+(2, '909290187', 'zidan', 'L', 'tegallaja', '11', '08959328903', '960b98f2767a8b4e417f747ad1adea6a438de622c5f46ed163b4d686d7e09c12'),
+(3, '728372324', 'hangesa', 'L', 'lebaksari', '11', '0838216217', '49c43ea53c82b6a6950d99293e247ca477b52b7485df5daaca6282a0674ecf46'),
+(4, '564738234', 'andy', 'L', 'jl kenanga', '11', '0845682193', '2937013f2181810606b2a799b05bda2849f3e369a20982a4138f0e0a55984ce4');
 
 -- ADD Primary KEY
 ALTER TABLE `siswa`
 ADD PRIMARY KEY (`id_siswa`);
 
--- Function hash password SHA-256
-CREATE FUNCTION hash_password(input_password VARCHAR(255))
-RETURNS VARCHAR(255)
-DETERMINISTIC
-BEGIN
-RETURN SHA2(input_password, 256)
-END;
+--update with set
+UPDATE siswa
+SET kelas = '12'
+WHERE kelas ='11' AND nama = 'andy';
+
+-- update with like
+UPDATE siswa
+SET nama = 'aris'
+WHERE nama LIKE '%andy%';
+
 
 
