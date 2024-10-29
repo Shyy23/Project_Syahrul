@@ -331,21 +331,7 @@ INSERT INTO `siswa` (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `id_
 (34, '0071774203', 'Taufik Hidayat', 'L', 'Kp Cileeur RT01/07', 16, '081564998125', '$2y$10$B69/36TAROw6yotgFzhWU.VF3c.yqCjkpNcKlI.jOJlgbF2LHsCkm'),
 (37, '123456', 'test', 'L', 'testing', 16, '1222333444', '$2y$10$iZKEF8MRy7ULJ9bAEsU29ednt8wII1yZVtZbDOTLVa77/QMN9Huq.');
 
--- CRUD -> C -> Create
--- INSERT INTO `siswa` (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `id_kelas`, `no_telepon`, `password`) VALUES
--- ('38', '1234567', 'test_Budi', 'L', 'Test Jl Kenanga', '16', '081234567', '$2y$10$8u0d1hAfkb8H.c6OfNIzNe6XMZSWKqz1cqZJ7Z7NixfAwQL1AzC7S');
 
---CRUD -> R -> Read
--- SELECT * FROM siswa;
-
--- CRUD -> U -> Update
--- UPDATE siswa
--- SET nama = 'Budi', no_telepon = '08897654321'
--- WHERE id_siswa = 38;
-
--- CRUD -> D -> Delete
--- DELETE FROM siswa 
--- WHERE id_siswa = 38;
 
 
 -- --------------------------------------------------------
