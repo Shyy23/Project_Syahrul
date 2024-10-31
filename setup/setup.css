@@ -10,6 +10,9 @@
     --first-color: hsl(var(--hue), 85%, 63%);
     --first-color-alt: hsl(var(--hue), 81%, 59%);
     --white-color: hsl(0, 0%, 100%);
+    --table-trans-1: hsla( 0, 0%, 0%, .5);
+    --table-trans-2: hsla( 0, 0%, 0%, .4);
+    --blue-color: hsl(175, 85%, 80%);
     --white-color-light: hsl(0, 0%, 20%);
     --black-color: hsl(0, 0%, 1%);
     --title-color: hsl(var(--hue), 18%, 16%);
@@ -29,6 +32,8 @@
                       ;
 
     --search-bar-color: hsla(0, 0%, 0%, .16);
+    --text-black : hsl(var(--hue), 0%, 90%);
+
 
 /* ================= FONT & TYPPGRAPHY ======================= */
     --body-font:  "Montserrat", sans-serif;
@@ -154,7 +159,7 @@ img{
     row-gap: 1.5rem;
     margin-inline: 1.5rem;
     padding-block: 9.5rem 4rem;
-
+    min-height: 100vh;
     padding-left: 1rem;
     /* width: 100%; */
 }
@@ -169,8 +174,11 @@ body.dark-theme{
     --container-color: hsl(var(--hue), 12%, 10%);
     --shadow-color: hsla(var(--hue), 80%, 4%, .3);
     --bw-color: hsl(var(--hue), 10%, 80%);
+    --text-black : hsl(var(--hue), 0%, 10%);
     --search-bar-color: hsla(0, 0%, 100%, .16);
     --white-color-light: hsl(0, 0%, 80%);
+    --table-trans-1: hsla( 0, 0%, 100%, .8);
+    --table-trans-2: hsla( 0, 0%, 100%, .2);
 }
 
 /* ================= 
