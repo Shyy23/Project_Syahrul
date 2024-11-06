@@ -25,6 +25,9 @@ text-align: center;
     row-gap: 2rem;
 }
 
+td.colspan-5 {
+    grid-column: span 5; /* Atur lebar elemen sesuai dengan kebutuhan */
+  }
 .table::-webkit-scrollbar-thumb{
     background-color: hsl(0, 0%, 15%);
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2024 at 11:10 PM
+-- Generation Time: Nov 06, 2024 at 10:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,6 +73,7 @@ CREATE TABLE `guru` (
   `nip` varchar(35) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
+  `id_mapel` int(11) NOT NULL,
   `alamat` text NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -81,13 +82,13 @@ CREATE TABLE `guru` (
 -- Dumping data for table `guru`
 --
 
-INSERT INTO `guru` (`id_guru`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VALUES
-(1, '123456', 'Asep', 'L', 'Jl.Kenangan', '$2y$10$6XFB9vQgOqGj/CRs.p/JE.bj1LxhlKnLqQNW9m8OpGwUPQddrmwle'),
-(2, '0085746289', 'Haris', 'L', 'Jl Merdeka No. 12, Kelurahan Kencana, Kota Bandung', '$2y$10$JaTn/CUYyaS5d1Nmdlke8ulFR3J7DFYJekEipA4WL5ZVNwwHmREVy'),
-(3, '0087465963', 'Budi Santoso', 'L', 'Jl. Raya Lembang No. 7, Kecamatan Lembang, Kabupaten Bandung Barat', '$2y$10$PAEzSnTI1zpYpYV/mb3o1eRflAVQsyiYho7x..rao3Za7gpw2p1YK'),
-(4, '19720515 199512 2 00', 'Ratna Dewi', 'P', 'Jl. Cipaganti No. 23, Kecamatan Coblong, Kota Bandung', '$2y$10$/wnS6Bep4VQ0cy4Slwacs.yImu9lsRUpu9pzkgoEdTjEzOPOW6LN6'),
-(5, '19740605 200201 2 01', 'Nur Aisyah', 'P', 'Jl. Cisarua No. 22, Kecamatan Cisarua, Kabupaten Bandung Barat', '$2y$10$lWsY.7/izIlDijqCS/r6a.HKWpv97nHJRBym6LlRF6k06DqMdVgKm'),
-(6, '19801012 200101 1 003', 'Andi Wijaya', 'L', 'Jl. Cihampelas No. 45, Kecamatan Cidadap, Kota Bandung', '$2y$10$sC.g34dwgDcneR2PeKNT3uoCKYyiH3bfg9GtyZditbjc2Jvvzw8t6');
+INSERT INTO `guru` (`id_guru`, `nip`, `nama`, `jenis_kelamin`, `id_mapel`, `alamat`, `password`) VALUES
+(1, '123456', 'Asep', 'L', 1, 'Jl.Kenangan', '$2y$10$6XFB9vQgOqGj/CRs.p/JE.bj1LxhlKnLqQNW9m8OpGwUPQddrmwle'),
+(2, '0085746289', 'Haris', 'L', 2, 'Jl Merdeka No. 12, Kelurahan Kencana, Kota Bandung', '$2y$10$JaTn/CUYyaS5d1Nmdlke8ulFR3J7DFYJekEipA4WL5ZVNwwHmREVy'),
+(3, '0087465963', 'Budi Santoso', 'L', 3, 'Jl. Raya Lembang No. 7, Kecamatan Lembang, Kabupaten Bandung Barat', '$2y$10$PAEzSnTI1zpYpYV/mb3o1eRflAVQsyiYho7x..rao3Za7gpw2p1YK'),
+(4, '19720515 199512 2 00', 'Ratna Dewi', 'P', 4, 'Jl. Cipaganti No. 23, Kecamatan Coblong, Kota Bandung', '$2y$10$/wnS6Bep4VQ0cy4Slwacs.yImu9lsRUpu9pzkgoEdTjEzOPOW6LN6'),
+(5, '19740605 200201 2 01', 'Nur Aisyah', 'P', 5, 'Jl. Cisarua No. 22, Kecamatan Cisarua, Kabupaten Bandung Barat', '$2y$10$lWsY.7/izIlDijqCS/r6a.HKWpv97nHJRBym6LlRF6k06DqMdVgKm'),
+(6, '19801012 200101 1 003', 'Andi Wijaya', 'L', 6, 'Jl. Cihampelas No. 45, Kecamatan Cidadap, Kota Bandung', '$2y$10$sC.g34dwgDcneR2PeKNT3uoCKYyiH3bfg9GtyZditbjc2Jvvzw8t6');
 
 -- --------------------------------------------------------
 
@@ -327,12 +328,9 @@ INSERT INTO `siswa` (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `id_
 (24, '0082206618', 'Muhammad Nur Afriansyah Idris', 'L', 'Perumahan Cimareme Indah', 16, '0895365232815', '$2y$10$AeIWxKYwQ7Rt6IpUgneyXOSHNt9UhoyOGNjwiSyqPTn3o070P3.je'),
 (26, '0074670066', 'Muhammad Zidan Hikayatulloh', 'L', 'Tegallaja', 16, '083829549232', '$2y$10$fI8DlSGy3sLzOGf33roEGueuBwcB5BGSRWDRYVIEVXP0/0Qu.D176'),
 (29, '0084567854', 'Reno Alwy Alifian', 'L', 'Kp Selacau RT02/05', 16, '089515656397', '$2y$10$cBw13AWtDcJetnDY/YLb6eRuzS0E6xsMlgeLAb9Rvxm.rk8i1OjJK'),
-(33, '0074095293', 'Syahrul Hidayatulloh', 'P', 'Kp Cempaka RT01/03', 16, '083820103522', '$2y$10$3dNAagmT.OPQritIApgoIOdLV5Bx/0/4u3m/9qBMFNeF1Pjkj7DSm'),
+(33, '0074095293', 'Syahrul Hidayatulloh', 'L', 'Kp Cempaka RT01/03', 16, '083820103522', '$2y$10$3dNAagmT.OPQritIApgoIOdLV5Bx/0/4u3m/9qBMFNeF1Pjkj7DSm'),
 (34, '0071774203', 'Taufik Hidayat', 'L', 'Kp Cileeur RT01/07', 16, '081564998125', '$2y$10$B69/36TAROw6yotgFzhWU.VF3c.yqCjkpNcKlI.jOJlgbF2LHsCkm'),
 (37, '123456', 'test', 'L', 'testing', 16, '1222333444', '$2y$10$iZKEF8MRy7ULJ9bAEsU29ednt8wII1yZVtZbDOTLVa77/QMN9Huq.');
-
-
-
 
 -- --------------------------------------------------------
 
@@ -356,7 +354,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `id_user_guru`, `id_user_siswa`, `user_type`, `username`, `password`, `role`) VALUES
 (1, NULL, 33, 'siswa', '0074095293', '$2y$10$3dNAagmT.OPQritIApgoIOdLV5Bx/0/4u3m/9qBMFNeF1Pjkj7DSm', 'user'),
-(2, 1, NULL, 'guru', '123456', '$2y$10$6XFB9vQgOqGj/CRs.p/JE.bj1LxhlKnLqQNW9m8OpGwUPQddrmwle', 'admin'),
 (3, NULL, 19, 'siswa', '0089558937', '$2y$10$smHVUMbFLbiOrYUHp1qgx.egEKtdMg0jSPRVwk.oXu2da9.xTv4O6', 'user'),
 (4, NULL, 24, 'siswa', '0082206618', '$2y$10$AeIWxKYwQ7Rt6IpUgneyXOSHNt9UhoyOGNjwiSyqPTn3o070P3.je', 'user'),
 (5, NULL, 23, 'siswa', '3072081858', '$2y$10$YqJJU0gRzfJomXLXMRdnOuFQPf/G9nrI0/aDTK5YhP.P8RsPJIHqq', 'user'),
@@ -418,7 +415,8 @@ ALTER TABLE `guru`
   ADD PRIMARY KEY (`id_guru`),
   ADD UNIQUE KEY `nip` (`nip`),
   ADD KEY `fk_nama` (`nama`),
-  ADD KEY `fk_password` (`password`);
+  ADD KEY `fk_password` (`password`),
+  ADD KEY `id_mapel` (`id_mapel`) USING BTREE;
 
 --
 -- Indexes for table `hari`
@@ -557,6 +555,12 @@ ALTER TABLE `user`
 ALTER TABLE `absen`
   ADD CONSTRAINT `fk_jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal` (`id_jadwal`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id_siswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `guru`
+--
+ALTER TABLE `guru`
+  ADD CONSTRAINT `fk_mapell` FOREIGN KEY (`id_mapel`) REFERENCES `mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jadwal`

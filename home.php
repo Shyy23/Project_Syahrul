@@ -75,23 +75,23 @@
                             <i class="fa-solid fa-chart-pie"></i>
                             <span>Dashboard</span>
                         </a>
-                        <a href="biodata.html" class="sidebar__link">
+                        <a href="biodata.php" class="sidebar__link">
                             <i class="fa-solid fa-house"></i>
                             <span>Biodata</span>
                         </a>
-                        <a href="galery.html" class="sidebar__link">
+                        <a href="galery.php" class="sidebar__link">
                             <i class="fa-solid fa-image"></i>
                             <span>Galery</span>
                         </a>
-                        <a href="media.html" class="sidebar__link">
+                        <a href="media.php" class="sidebar__link">
                             <i class="fa-solid fa-music"></i>    
                             <span>Media</span>
                         </a>
-                        <a href="table.html" class="sidebar__link">
+                        <a href="table.php" class="sidebar__link">
                             <i class="fa-solid fa-table-list"></i>
                             <span>Tabel</span>
                         </a>
-                        <a href="form.html" class="sidebar__link">
+                        <a href="form.php" class="sidebar__link">
                             <i class="fa-regular fa-file"></i>
                             <span>Form</span>
                         </a>
