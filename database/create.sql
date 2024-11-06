@@ -104,49 +104,9 @@ ADD PRIMARY KEY (`id_siswa`);
 
 
 
--- CRUD -> U -> UPDATE
--- update with where
---update with beberapa kondisi
-UPDATE siswa
-SET kelas = '12'
-WHERE kelas ='11' AND nama = 'andy';
 
--- update with like
-UPDATE siswa
-SET nama = 'aris'
-WHERE nama LIKE '%andy%';
 
--- Update dengan function
-UPDATE siswa 
-SET `password` = hash_password('password_baru')
-WHERE id_siswa = 5;
 
--- CRUD -> D -> DELETE
--- Menghapus semua data
-DELETE FROM siswa
--- menghapus data berdasarkan id_siswa
-DELETE FROM siswa
-WHERE id_siswa = 5;
-
--- menghapus dengan drop
-DROP DATABASE query_syahrul;
-DROP TABLE siswa;
-
--- Menghapus dengan TRUNCATE
-TRUNCATE TABLE siswa;
-
--- Menghapus Alter Drop
-ALTER TABLE siswa
-DROP COLUMN kp_cempaka RT03/03;
-
-ALTER TABLE siswa
-DROP INDEX idx_nama;
-
--- Menghapus dengan REVOKE
-REVOKE privilege_type ON nama_database.* FROM 'username'@'host';
-
-ALTER TABLE siswa
-DROP CONSTRAINT fk_kelas;;
 
 
 
