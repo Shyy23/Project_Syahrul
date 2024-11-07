@@ -177,7 +177,7 @@ body.dark-theme{
     --text-black : hsl(var(--hue), 0%, 10%);
     --search-bar-color: hsla(0, 0%, 100%, .16);
     --white-color-light: hsl(0, 0%, 80%);
-    --table-trans-1: hsla( 0, 0%, 100%, .8);
+    --table-trans-1: hsla( 0, 0%, 100%, .6);
     --table-trans-2: hsla( 0, 0%, 100%, .2);
 }
 

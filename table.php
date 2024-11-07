@@ -1,76 +1,6 @@
 <?php
 include "koneksi.php";
-// Query untuk data tabel siswa
-$sql_siswa= "SELECT s.*, CONCAT(
-    CASE k.tingkatan
-    WHEN '10' THEN 'X'
-    WHEN '11' THEN 'XI'
-    WHEN '12' THEN 'XII'
-    ELSE k.tingkatan
-    END, ' ', k.jurusan, ' ', k.char) AS nama_kelas_s
-FROM siswa s
-JOIN kelas k ON s.id_kelas = k.id_kelas
-ORDER BY id_siswa
-";
-
-// Query untuk data tabel guru
-$sql_guru="SELECT g.*, m.nama_mapel AS nama_mapel_g
-FROM guru g
-JOIN mapel m ON g.id_mapel = m.id_mapel
-ORDER BY id_guru";
-
-$sql_jadwal="SELECT j.*, 
-h.nama_hari AS nama_hari_j , 
-g.nama AS nama_guru_j,
-CONCAT(
-    CASE k.tingkatan
-    WHEN '10' THEN 'X'
-    WHEN '11' THEN 'XI'
-    WHEN '12' THEN 'XII'
-    ELSE k.tingkatan
-    END, ' ', k.jurusan, ' ', k.char) AS nama_kelas_j,
-m.nama_mapel AS nama_mapel_j
-
-FROM jadwal j
-
-JOIN
-    hari h ON j.id_hari = h.id_hari
-JOIN
-    guru g ON j.id_guru = g.id_guru
-JOIN 
-    kelas k ON j.id_kelas = k.id_kelas
-JOIN
-    mapel m ON j.id_mapel = m.id_mapel
-ORDER BY id_jadwal    
-";
-
-// Query untuk tabel data absen
-$sql_absen = "SELECT a.*,
-            s.nama AS nama_siswa_a,
-            j.id_jadwal,
-            m.nama_mapel AS nama_mapel_a
-
-FROM absen a
-
-JOIN 
-    siswa s ON a.id_siswa = s.id_siswa
-JOIN 
-    jadwal j ON a.id_jadwal = j.id_jadwal
-JOIN
-    mapel m ON j.id_mapel = m.id_mapel
-ORDER BY id_absen
-            ";
-// Execution code untuk tabel siswa
-$result_siswa= $conn->query($sql_siswa);
-
-// Execution code untuk tabel guru
-$result_guru= $conn->query($sql_guru);
-
-// Execution code untuk tabel jadwal
-$result_jadwal= $conn->query($sql_jadwal);
-
-// Execution code untuk tabel absen
-$result_absen= $conn->query($sql_absen);
+include "query/query.php";
 
 
 ?>
@@ -86,9 +16,9 @@ $result_absen= $conn->query($sql_absen);
         <link rel="shortcut icon" href="assets/icon/icon-2/Galery.ico" type="image/x-icon">
 
     <!-- ================= FONT AWESOME ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css?v=<?php echo time();?>">
     <!-- ================= REMIXICON ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css?v=<?php echo time();?>">
         
     <!-- ================= Hamburgers ===================== -->
     <link rel="stylesheet" href="dist/css/hamburgers.css">
@@ -97,7 +27,7 @@ $result_absen= $conn->query($sql_absen);
     <link rel="stylesheet" href="dist/css/swiper-bundle.min.css">
 
     <!-- ================= CSS ===================== -->
-    <link rel="stylesheet" href="setup/setup.css">
+    <link rel="stylesheet" href="setup/setup.css?v=<?php echo time();?>">
     <link rel="stylesheet" href="dist/css/table.css?v=<?php echo time();?>">
 </head>
 <body>
@@ -213,10 +143,8 @@ $result_absen= $conn->query($sql_absen);
             <!-- ================= MAIN  ===================== -->
              <main class="main container" id="main">
 
-                <section class="table">
-                    <div class="tab__head">
-
-                    
+                <div class="table">
+                    <section class="tab__head">
                     <div class="tab__box">
                         <button class="tab__btn active">Siswa</button>
                         <button class="tab__btn">Guru</button>
@@ -225,55 +153,52 @@ $result_absen= $conn->query($sql_absen);
                         <div class="line"></div>
                         <div class="line__2"></div>
                     </div>
-                    </div>
-                    <div class="content__box">
-                        <div class="content">
-
-                        <h2 class="table__title"> Siswa</h2>
-                        <a href="" class="data__add">Tambah Siswa</a>
-
-                        <table class="table__container">
-                            <thead class="table__head">
-                                <tr class="table__row">
-                                    <th class="table__col">No</th>
-                                    <th class="table__col">Nama</th>
-                                    <th class="table__col">Jenis Kelamin</th>
-                                    <th class="table__col">Kelas</th>
-                                    <th class="table__col">Alamat</th>
-                                    <th class="table__col">Aksi</th>
-                                </tr>
-                            </thead>
-                                <tbody class="table__body">
-                                    <?php
-                                    if($result_siswa->num_rows > 0){
-                                        $no = 1;
-    
-                                        while($row = $result_siswa->fetch_assoc()){
-                                            echo "<tr class='table__row'>";
-                                            echo "<td class='table__data'>" . $no++ . "</td>";
-                                            echo "<td class='table__data'>" . $row['nama'] . "</td>";
-                                            echo "<td class='table__data'>" . $row['jenis_kelamin'] . "</td>";
-                                            echo "<td class='table__data'>" . $row['nama_kelas_s'] . "</td>";
-                                            echo "<td class='table__data'>" . $row['alamat'] . "</td>";
-                                            echo "<td class='table__data'>";
-                                            echo "<a href='crud/edit.php?id=". $row['id_siswa'] ."'>EDIT</a> | ";
-                                            echo "<a href='crud/delete.php?id=". $row['id_siswa'] ."'>DELETE</a>";
-                                            echo "</td>";
-                                            echo '</tr>';
+                   
+                    </section>
+                    <section class="table__body content__box">
+                        <div class="content active content__1">
+                            
+                            <table class="table__container">
+                                <thead class="table__head">
+                                    <tr class="table__row">
+                                        <th class="table__col">No</th>
+                                        <th class="table__col">Nama</th>
+                                        <th class="table__col">Jenis Kelamin</th>
+                                        <th class="table__col">Kelas</th>
+                                        <th class="table__col">Alamat</th>
+                                        <th class="table__col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                    <tbody class="table__bo">
+                                        <?php
+                                        if($result_siswa->num_rows > 0){
+                                            $no = 1;
+        
+                                            while($row = $result_siswa->fetch_assoc()){
+                                                echo "<tr class='table__row'>";
+                                                echo "<td class='table__data'>" . $no++ . "</td>";
+                                                echo "<td class='table__data'>" . $row['nama'] . "</td>";
+                                                echo "<td class='table__data'>" . $row['jenis_kelamin'] . "</td>";
+                                                echo "<td class='table__data'>" . $row['nama_kelas_s'] . "</td>";
+                                                echo "<td class='table__data'>" . $row['alamat'] . "</td>";
+                                                echo "<td class='table__data'>";
+                                                echo "<a href='crud/edit.php?id=". $row['id_siswa'] ."'>EDIT</a> | ";
+                                                echo "<a href='crud/delete.php?id=". $row['id_siswa'] ."'>DELETE</a>";
+                                                echo "</td>";
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo "<tr><td class='colspan-5'>Belum ada Catatan</td></tr>";
                                         }
-                                    } else {
-                                        echo "<tr><td class='colspan-5'>Belum ada Catatan</td></tr>";
-                                    }
-                                    
-                                    ?>
-                                </tbody>
-                           
-                        </table>
-                        </div>            
+                                        
+                                        ?>
+                                    </tbody>
+                               
+                            </table>
 
-                        <div class="content">
-                        <h2 class="table__title"> Guru</h2>
-                        <a href="" class="data__add">Tambah Guru</a>
+
+                        </div>            
+                        <div class="content content__2">
 
                         <table class="table__container">
                             <thead class="table__head">
@@ -286,7 +211,7 @@ $result_absen= $conn->query($sql_absen);
                                     <th class="table__col">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="table__body">
+                            <tbody class="table__body_2">
                                 <?php
                                 if($result_guru->num_rows > 0){
                                     $no = 1;
@@ -312,12 +237,7 @@ $result_absen= $conn->query($sql_absen);
                             </tbody>
                         </table>
                         </div>        
-
-                    
-                        <div class="content">
-                        <h2 class="table__title"> Jadwal</h2>
-                        <a href="" class="data__add">Tambah Jadwal</a>
-                        
+                        <div class="content content__3">
                         <table class="table__container">
                             <thead class="table__head">
                                 <tr class="table__row">
@@ -331,7 +251,7 @@ $result_absen= $conn->query($sql_absen);
                                     <th class="table__col">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="table__body">
+                            <tbody class="table__body__3">
                                 <?php
                                 if($result_jadwal->num_rows > 0){
                                     $no = 1;
@@ -360,12 +280,8 @@ $result_absen= $conn->query($sql_absen);
                                 ?>
                             </tbody>
                             </table>
-                            </div>
-                            
-                            <div class="content">
-                                <h2 class="table__title">Presensi</h2>
-                                <a href="" class="data__add">Tambah Presensi</a>
-        
+                        </div>
+                        <div class="content content__4">
                                 <table class="table__container">
                                     <thead class="table__head">
                                         <tr class="table__row">
@@ -377,7 +293,7 @@ $result_absen= $conn->query($sql_absen);
                                             <th class="table__col">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table__body">
+                                    <tbody class="table__body__4">
                                         <?php
                                         if($result_absen->num_rows > 0){
                                             $no = 1;
@@ -402,9 +318,12 @@ $result_absen= $conn->query($sql_absen);
                                         ?>
                                     </tbody>
                                 </table>
-                                </div>
-                            </div>
-                </section>
+                        </div>
+                    </section>
+                    <section class="add__data">
+                        <a href="" class="add__btn">Tambahkan Siswa <i class="fa-regular fa-address-book"></i></a>
+                    </section>
+                </div>
              </main>
                <!-- ================= FOOTER ===================== -->
             <footer class="footer footer__bottom" id="footer">
