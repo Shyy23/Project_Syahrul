@@ -22,9 +22,22 @@ text-align: center;
     box-shadow: .5rem 1rem .8rem var(--shadow-color);
     overflow: hidden;
     display: grid;
-    row-gap: 2rem;
+    padding-top: 1rem;
+
+    row-gap: 1rem;
 }
 
+.content__box{
+
+    text-align: center;
+}
+
+.content__box .content{
+    display: none;
+}
+.table__title{
+    margin-bottom: .75rem;
+}
 td.colspan-5 {
     grid-column: span 5; /* Atur lebar elemen sesuai dengan kebutuhan */
   }
@@ -50,23 +63,58 @@ td.colspan-5 {
     padding: 0.8rem 1rem;
     background-color: var(--table-trans-2);
 }
+.table__container{
+    overflow-x: auto;
+}
 thead, th{
     position: sticky;
     left: 0;
     top: 0;
     background-color: var(--first-color);
 }
+
+.tab__box{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.tab__head{
+    padding-inline: 2rem;
+}
+
+.tab__box .tab__btn{
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--bw-color);
+    padding: 1rem;
+    cursor: pointer;
+    transition: color .2s;
+   
+}
+
+.tab__box .tab__btn.active{
+    color: var(--first-color);
+}
 .table__body::-webkit-scrollbar{
     height: .8rem;
     visibility: hidden;
+    
+
 }
 .table__body::-webkit-scrollbar-thumb{
     border-radius: .2rem;
     background-color: hsla( 0, 0%, 0%, .2);
     visibility: hidden;
+    
+ 
 }
 .table__body::-webkit-scrollbar-thumb:hover{
     visibility: visible;
+    
+
 }
 
 table{
@@ -84,6 +132,28 @@ tbody tr:nth-child(even){
 tbody tr:hover{
     background-color: hsl(0, 0%, 70%);
 }
+
+.line{
+    position: absolute;
+    left: 47px;
+    bottom: -.05rem;
+    width: 5rem;
+    height: 0.25rem;
+    background-color: var(--first-color);
+    border-radius: 1rem;
+    transition: all .4s ease-in-out;
+}
+
+.line__2{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-bottom: 2px solid hsla(0, 0%, 100%, .2);
+    width: calc(100% - 2 * 1.5rem);
+    margin-inline: 1.5rem;
+    border-radius: 1rem;
+}
+
 
 @media screen and (max-width:1000px) {
     td:not(:first-of-type){

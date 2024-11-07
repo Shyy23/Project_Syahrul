@@ -58,7 +58,7 @@ JOIN
     jadwal j ON a.id_jadwal = j.id_jadwal
 JOIN
     mapel m ON j.id_mapel = m.id_mapel
-ORDER BY tanggal
+ORDER BY id_absen
             ";
 // Execution code untuk tabel siswa
 $result_siswa= $conn->query($sql_siswa);
@@ -98,7 +98,7 @@ $result_absen= $conn->query($sql_absen);
 
     <!-- ================= CSS ===================== -->
     <link rel="stylesheet" href="setup/setup.css">
-    <link rel="stylesheet" href="dist/css/table.css">
+    <link rel="stylesheet" href="dist/css/table.css?v=<?php echo time();?>">
 </head>
 <body>
             <!-- ================= HEADER ===================== -->
@@ -214,14 +214,21 @@ $result_absen= $conn->query($sql_absen);
              <main class="main container" id="main">
 
                 <section class="table">
+                    <div class="tab__head">
+
+                    
                     <div class="tab__box">
-                        <button class="tab__btn">Siswa</button>
+                        <button class="tab__btn active">Siswa</button>
                         <button class="tab__btn">Guru</button>
                         <button class="tab__btn">Jadwal</button>
                         <button class="tab__btn">Presensi</button>
+                        <div class="line"></div>
+                        <div class="line__2"></div>
                     </div>
-
+                    </div>
                     <div class="content__box">
+                        <div class="content">
+
                         <h2 class="table__title"> Siswa</h2>
                         <a href="" class="data__add">Tambah Siswa</a>
 
@@ -236,34 +243,35 @@ $result_absen= $conn->query($sql_absen);
                                     <th class="table__col">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="table__body">
-                                <?php
-                                if($result_siswa->num_rows > 0){
-                                    $no = 1;
-
-                                    while($row = $result_siswa->fetch_assoc()){
-                                        echo "<tr class='table__row'>";
-                                        echo "<td class='table__data'>" . $no++ . "</td>";
-                                        echo "<td class='table__data'>" . $row['nama'] . "</td>";
-                                        echo "<td class='table__data'>" . $row['jenis_kelamin'] . "</td>";
-                                        echo "<td class='table__data'>" . $row['nama_kelas_s'] . "</td>";
-                                        echo "<td class='table__data'>" . $row['alamat'] . "</td>";
-                                        echo "<td class='table__data'>";
-                                        echo "<a href='crud/edit.php?id=". $row['id_siswa'] ."'>EDIT</a> | ";
-                                        echo "<a href='crud/delete.php?id=". $row['id_siswa'] ."'>DELETE</a>";
-                                        echo "</td>";
-                                        echo '</tr>';
+                                <tbody class="table__body">
+                                    <?php
+                                    if($result_siswa->num_rows > 0){
+                                        $no = 1;
+    
+                                        while($row = $result_siswa->fetch_assoc()){
+                                            echo "<tr class='table__row'>";
+                                            echo "<td class='table__data'>" . $no++ . "</td>";
+                                            echo "<td class='table__data'>" . $row['nama'] . "</td>";
+                                            echo "<td class='table__data'>" . $row['jenis_kelamin'] . "</td>";
+                                            echo "<td class='table__data'>" . $row['nama_kelas_s'] . "</td>";
+                                            echo "<td class='table__data'>" . $row['alamat'] . "</td>";
+                                            echo "<td class='table__data'>";
+                                            echo "<a href='crud/edit.php?id=". $row['id_siswa'] ."'>EDIT</a> | ";
+                                            echo "<a href='crud/delete.php?id=". $row['id_siswa'] ."'>DELETE</a>";
+                                            echo "</td>";
+                                            echo '</tr>';
+                                        }
+                                    } else {
+                                        echo "<tr><td class='colspan-5'>Belum ada Catatan</td></tr>";
                                     }
-                                } else {
-                                    echo "<tr><td class='colspan-5'>Belum ada Catatan</td></tr>";
-                                }
-                                
-                                ?>
-                            </tbody>
+                                    
+                                    ?>
+                                </tbody>
+                           
                         </table>
-                    </div>
+                        </div>            
 
-                    <div class="content__box">
+                        <div class="content">
                         <h2 class="table__title"> Guru</h2>
                         <a href="" class="data__add">Tambah Guru</a>
 
@@ -303,10 +311,10 @@ $result_absen= $conn->query($sql_absen);
                                 ?>
                             </tbody>
                         </table>
-                    </div>
+                        </div>        
 
                     
-                    <div class="content__box">
+                        <div class="content">
                         <h2 class="table__title"> Jadwal</h2>
                         <a href="" class="data__add">Tambah Jadwal</a>
                         
@@ -354,7 +362,7 @@ $result_absen= $conn->query($sql_absen);
                             </table>
                             </div>
                             
-                            <div class="content__box">
+                            <div class="content">
                                 <h2 class="table__title">Presensi</h2>
                                 <a href="" class="data__add">Tambah Presensi</a>
         
@@ -394,6 +402,7 @@ $result_absen= $conn->query($sql_absen);
                                         ?>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                 </section>
              </main>
@@ -414,6 +423,8 @@ $result_absen= $conn->query($sql_absen);
             </footer>
 
     
-    <script src="dist/js/galery.js"></script>
+    <script src="dist/js/table.js?v=<?php echo time();?>"></script>
+    <script src="dist/js/galery.js?v=<?php echo time();?>"></script>
+    
 </body>
 </html>
