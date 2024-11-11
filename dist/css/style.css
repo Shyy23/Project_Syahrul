@@ -211,7 +211,7 @@ Color Changes for some variables on dark theme
     background-color: transparent;
     display: grid;
     row-gap: 1rem;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.5rem;
 }
 
 .header__container,
@@ -623,7 +623,7 @@ font-size: 1.25rem;
     background-color: hsla(0, 0%, 0%, .2);
     backdrop-filter: blur(16px);
     box-shadow: 2px 0 24px var(--shadow-color);
-    padding-block: 2rem;
+    padding-block: 1rem;
     transition: all .4s;
     left: 0;
     right: 0;

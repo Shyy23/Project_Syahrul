@@ -169,7 +169,7 @@ include "query/query.php";
                                         <th class="table__col">Aksi</th>
                                     </tr>
                                 </thead>
-                                    <tbody class="table__bo">
+                                    <tbody class="table__body_1">
                                         <?php
                                         if($result_siswa->num_rows > 0){
                                             $no = 1;
@@ -290,6 +290,7 @@ include "query/query.php";
                                             <th class="table__col">Nama Mapel</th>
                                             <th class="table__col">Waktu</th>
                                             <th class="table__col">Tanggal</th>
+                                            <th class="table__col">Keterangan</th>
                                             <th class="table__col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -305,6 +306,7 @@ include "query/query.php";
                                                 echo "<td class='table__data'>" . $row['nama_mapel_a'] . "</td>";
                                                 echo "<td class='table__data'>" . date('H:i', strtotime($row['waktu'])) . "</td>";
                                                 echo "<td class='table__data'>" . date('d-m-Y', strtotime($row['tanggal'])) . "</td>";
+                                                echo "<td class='table__data'>" . $row['new_keterangan'] . "</td>";
                                                 echo "<td class='table__data'>";
                                                 echo "<a class='edit__btn' href='crud/edit.php?id=". $row['id_absen'] ."'>EDIT</a> | ";
                                                 echo "<a class='delete__btn' href='crud/delete.php?id=". $row['id_absen'] ."'>DELETE</a>";
@@ -322,11 +324,11 @@ include "query/query.php";
                     </section>
                     
                 </div>
-                <section class="add__data">
+                <!-- <section class="add__data">
                     <div class="aksi">
                         <a href="" class="add__btn btn">Tambahkan Siswa <i class="fa-regular fa-address-book"></i></a>              
                     </div>
-                </section>
+                </section> -->
                                         
              </main>
                <!-- ================= FOOTER ===================== -->

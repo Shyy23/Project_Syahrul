@@ -18,7 +18,7 @@
     --title-color: hsl(var(--hue), 18%, 16%);
     --bw-color: hsl(var(--hue), 0%, 1%);
     --text-color: hsl(var(--hue), 8%, 56%);
-    --body-color: hsl(var(--hue), 100%, 99%);
+    --body-color: hsl(var(--hue), 70%, 99%);
     --container-color: hsl(var(--hue), 8%, 10%);
     --shadow-color: hsla(var(--hue), 80%, 4%, .1);
     --shadow-bg: linear-gradient(180deg,
@@ -200,10 +200,11 @@ Color Changes for some variables on dark theme
     z-index: var(--z-fixed);
     margin: 0.75rem;
     width: 100%;
-    background-color: transparent;
+    background-color: var(--body-color);
+    box-shadow: 0 2px 24px var(--shadow-color);
     display: grid;
     row-gap: 1rem;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.5rem;
 }
 
 .header__container,
@@ -277,8 +278,8 @@ Color Changes for some variables on dark theme
     position: absolute;
     width: 1000%;
     height: 100%;
-    background-color: hsla(0, 0%, 0%, .2);
-    backdrop-filter: blur(16px);
+    background-color: var(--body-color);
+    box-shadow: 0 4px 24px var(--shadow-color);
     top: 0;
     left: 0;
     z-index: -1;
@@ -304,8 +305,8 @@ Color Changes for some variables on dark theme
     bottom: 0;
     z-index: var(--z-fixed);
     width: 288px;
-    background-color: hsla(0, 0%, 0%, .2);
-    backdrop-filter: blur(16px);
+    background-color: var(--body-color);
+
     box-shadow: 2px 0 24px var(--shadow-color);
     padding-block: 1.5rem;
     margin: 0.75rem;
@@ -468,10 +469,10 @@ font-size: 1.25rem;
     z-index: var(--z-tooltip);
     position: relative;
     padding-left: 22.5rem;
-    background-color: hsla(0, 0%, 0%, .2);
+    background-color: var(--body-color);
     backdrop-filter: blur(16px);
     box-shadow: 2px 0 24px var(--shadow-color);
-    padding-block: 2rem;
+    padding-block: 1rem;
     transition: all .4s;
     left: 0;
     right: 0;
@@ -695,6 +696,16 @@ font-size: 1.25rem;
 
 }
 /* For Medium Device */
+
+@media screen and (max-width:967px) {
+    .footer{
+        padding-left: 1rem;
+        margin-left: 0;
+    }
+    .header{
+        margin-left: 0;
+    }
+}
 @media screen and (min-width:768px) {
 
    

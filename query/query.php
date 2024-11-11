@@ -45,6 +45,13 @@ ORDER BY id_jadwal
 
 // Query untuk tabel data absen
 $sql_absen = "SELECT a.*,
+            CASE a.keterangan
+            WHEN 'H' THEN 'Hadir'
+            WHEN 'A' THEN 'Alfa'
+            WHEN 'I' THEN 'Izin'
+            WHEN 'S' THEN 'Sakit'
+            ELSE a.keterangan 
+            END AS new_keterangan,
             s.nama AS nama_siswa_a,
             j.id_jadwal,
             m.nama_mapel AS nama_mapel_a

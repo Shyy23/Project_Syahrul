@@ -9,19 +9,19 @@
         <link rel="shortcut icon" href="assets/icon/icon-2/Galery.ico" type="image/x-icon">
 
     <!-- ================= FONT AWESOME ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css?v=<?php echo time();?>">
     <!-- ================= REMIXICON ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css?v=<?php echo time();?>">
         
     <!-- ================= Hamburgers ===================== -->
-    <link rel="stylesheet" href="dist/css/hamburgers.css">
+    <link rel="stylesheet" href="dist/css/hamburgers.css?v=<?php echo time();?>">
     
     <!-- ================= SWIPER CSS ===================== -->
-    <link rel="stylesheet" href="dist/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="dist/css/swiper-bundle.min.css?v=<?php echo time();?>">
 
     <!-- ================= CSS ===================== -->
-    <link rel="stylesheet" href="setup/setup.css">
-    <link rel="stylesheet" href="dist/css/media.css">
+    <link rel="stylesheet" href="setup/setup.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="dist/css/media.css?v=<?php echo time(); ?>">
 </head>
 <body>
             <!-- ================= HEADER ===================== -->
@@ -171,6 +171,6 @@
             </footer>
 
     
-    <script src="dist/js/galery.js"></script>
+    <script src="dist/js/galery.js?v=<?php echo time();?>"></script>
 </body>
 </html>

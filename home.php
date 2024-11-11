@@ -7,18 +7,18 @@
     <link rel="shortcut icon" href="assets/icon/home.ico" type="image/x-icon">
     
     <!-- ================= FONT AWESOME ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css?v=<?php echo time();?>">
     <!-- ================= REMIXICON ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css?v=<?php echo time();?>">
     
     <!-- ================= Hamburgers ===================== -->
-    <link rel="stylesheet" href="dist/css/hamburgers.css">
+    <link rel="stylesheet" href="dist/css/hamburgers.css?v=<?php echo time ();?>">
 
      <!-- ================= SWIPER CSS ===================== -->
-     <link rel="stylesheet" href="dist/css/swiper-bundle.min.css">
+     <link rel="stylesheet" href="dist/css/swiper-bundle.min.css?v=<?php echo time ();?>">
 
      <!-- ================= CSS ===================== -->
-     <link rel="stylesheet" href="dist/css/style.css">
+     <link rel="stylesheet" href="dist/css/style.css?v=<?php echo time ();?>">
 
      <title>Home</title>
 </head>
@@ -461,9 +461,9 @@
     <!-- ================= SCROLL REVEAL ===================== -->
 
     <!-- ================= SWIPER JS ===================== -->
-    <script src="dist/js/swiper-bundle.min.js"></script>
+    <script src="dist/js/swiper-bundle.min.js?v=<?php echo time();?>"></script>
 
     <!-- ================= MAIN js ===================== -->
-    <script src="dist/js/script.js"></script>
+    <script src="dist/js/script.js?v=<?php echo time();?>"></script>
 </body>
 </html>

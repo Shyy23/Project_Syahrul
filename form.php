@@ -9,19 +9,19 @@
         <link rel="shortcut icon" href="assets/icon/icon-2/Galery.ico" type="image/x-icon">
 
     <!-- ================= FONT AWESOME ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css?v=<?php echo time();?>">
     <!-- ================= REMIXICON ===================== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css?v=<?php echo time();?>">
         
     <!-- ================= Hamburgers ===================== -->
-    <link rel="stylesheet" href="dist/css/hamburgers.css">
+    <link rel="stylesheet" href="dist/css/hamburgers.css?v=<?php echo time();?>">
     
     <!-- ================= SWIPER CSS ===================== -->
-    <link rel="stylesheet" href="dist/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="dist/css/swiper-bundle.min.css?v=<?php echo time();?>">
 
     <!-- ================= CSS ===================== -->
-    <link rel="stylesheet" href="setup/setup.css">
-    <link rel="stylesheet" href="dist/css/form.css">
+    <link rel="stylesheet" href="setup/setup.css?v=<?php echo time();?>">
+    <link rel="stylesheet" href="dist/css/form.css?v=<?php echo time();?>">
 </head>
 <body>
             <!-- ================= HEADER ===================== -->
@@ -140,20 +140,20 @@
                     <form action="" class="form grid">
                         <div class="data__content grid ">
                             <label for="nama">Masukkan Nama</label>
-                            <input type="text" placeholder="text disini">
+                            <input type="text" placeholder="text disini" id="nama">
                             <label for="password"> Masukkan Password</label>
-                            <input type="password" placeholder="masukkan password">
-                            <label for="password"> Masukkan email</label>
-                            <input type="password" placeholder="masukkan email">
+                            <input type="password" placeholder="masukkan password" id="password">
+                            <label for="email"> Masukkan email</label>
+                            <input type="email" placeholder="masukkan email" id="email">
                         </div>
 
                         <div class="radio__content grid">
                             <p>Ini radio button</p>
                             <div class="radio grid">
-                            <input type="radio" name="choice" class="radio__button">
+                            <input type="radio" name="choice" class="radio__button" id="choice1">
                             <label for="choice1"> ya</label>	
-                            <input type="radio" name="choice" class="radio__button">
-                            <label for="choice1"> tidak</label>	
+                            <input type="radio" name="choice" class="radio__button" id="choice2">
+                            <label for="choice2"> tidak</label>	
                             </div>
                             
                         </div>
@@ -199,6 +199,6 @@
             </footer>
 
     
-    <script src="dist/js/galery.js"></script>
+    <script src="dist/js/galery.js?v=<?php echo time();?>"></script>
 </body>
 </html>
