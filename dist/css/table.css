@@ -262,17 +262,19 @@ td.colspan-5 {
 }
 
 
-.btn:hover{
-    color: var(--first-color);
+.btn:hover {
+    box-shadow: 
+        2px -4px 6px var(--first-color),  /* Bayangan luar */
+        inset 2px -4px 4px -4px var(--title-color); 
 }
 
 .btn{
-    color: var(--bw-color);
-    font-size: var(--h2-font-size);
-    font-weight: var(--font-semi-bold);
-    background-color:transparent;
-    padding: 1rem 1.5rem;
-    border-radius: .2rem;
-    cursor: pointer;
-    transition: color .4s;
+  background-color: var(--first-color);
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+  font-size: .75rem;
+  box-shadow: 0 2px 24px transparent;
+  transition: box-shadow .4s ease;
 }

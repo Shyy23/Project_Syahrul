@@ -146,10 +146,10 @@ include "query/query.php";
                 <div class="table">
                     <section class="tab__head">
                     <div class="tab__box">
-                        <button class="tab__btn active">Siswa</button>
-                        <button class="tab__btn">Guru</button>
-                        <button class="tab__btn">Jadwal</button>
-                        <button class="tab__btn">Presensi</button>
+                        <button class="tab__btn  active">Siswa</button>
+                        <button class="tab__btn ">Guru</button>
+                        <button class="tab__btn ">Jadwal</button>
+                        <button class="tab__btn ">Presensi</button>
                         <div class="line"></div>
                         <div class="line__2"></div>
                     </div>
@@ -166,7 +166,8 @@ include "query/query.php";
                                         <th class="table__col">Jenis Kelamin</th>
                                         <th class="table__col">Kelas</th>
                                         <th class="table__col">Alamat</th>
-                                        <th class="table__col">Aksi</th>
+                                        <th class="table__col">Edit</th>
+                                        <th class="table__col">Delete</th>
                                     </tr>
                                 </thead>
                                     <tbody class="table__body_1">
@@ -182,8 +183,10 @@ include "query/query.php";
                                                 echo "<td class='table__data'>" . $row['nama_kelas_s'] . "</td>";
                                                 echo "<td class='table__data'>" . $row['alamat'] . "</td>";
                                                 echo "<td class='table__data'>";
-                                                echo "<a class='edit__btn' href='crud/edit.php?id=". $row['id_siswa'] ."'>EDIT</a> | ";
-                                                echo "<a class='delete__btn' href='crud/delete.php?id=". $row['id_siswa'] ."'>DELETE</a>";
+                                                echo "<a class='edit__btn btn' href='crud/edit.php?tabel=siswa&siswa_id=". $row['id_siswa'] ."'>EDIT</a>";
+                                                echo "</td>";
+                                                echo "<td class='table__data'>";
+                                                echo "<a class='delete__btn btn' href='crud/delete.php?tabel=siswa&siswa_id=". $row['id_siswa'] ."'>DELETE</a>";                                       
                                                 echo "</td>";
                                                 echo '</tr>';
                                             }
@@ -208,7 +211,8 @@ include "query/query.php";
                                     <th class="table__col">Jenis Kelamin</th>
                                     <th class="table__col">Mapel</th>
                                     <th class="table__col">Alamat</th>
-                                    <th class="table__col">Aksi</th>
+                                    <th class="table__col">Edit</th>
+                                    <th class="table__col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody class="table__body_2">
@@ -224,8 +228,10 @@ include "query/query.php";
                                         echo "<td class='table__data'>" . $row['nama_mapel_g'] . "</td>";
                                         echo "<td class='table__data'>" . $row['alamat'] . "</td>";
                                         echo "<td class='table__data'>";
-                                        echo "<a class='edit__btn' href='crud/edit.php?id=". $row['id_guru'] ."'>EDIT</a> | ";
-                                        echo "<a class='delete__btn' href='crud/delete.php?id=". $row['id_guru'] ."'>DELETE</a>";
+                                        echo "<a class='edit__btn btn' href='crud/edit.php?tabel=guru&guru_id=". $row['id_guru'] ."'>EDIT</a>";
+                                        echo "</td>";
+                                        echo "<td class='table__data'>";
+                                        echo "<a class='delete__btn btn' href='crud/delete.php?tabel=guru&guru_id=". $row['id_guru'] ."'>DELETE</a>";                                       
                                         echo "</td>";
                                         echo '</tr>';
                                     }
@@ -248,7 +254,8 @@ include "query/query.php";
                                     <th class="table__col">Mapel</th>
                                     <th class="table__col">Jam Mulai</th>
                                     <th class="table__col">Jam Selesai</th>
-                                    <th class="table__col">Aksi</th>
+                                    <th class="table__col">Edit</th>
+                                    <th class="table__col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody class="table__body__3">
@@ -268,8 +275,10 @@ include "query/query.php";
                                         echo "<td class='table__data'>" . date('H:i', strtotime($row['jam_mulai'])) . "</td>";
                                         echo "<td class='table__data'>" . date('H:i', strtotime($row['jam_selesai'])) . "</td>";
                                         echo "<td class='table__data'>";
-                                        echo "<a class='edit__btn' href='crud/edit.php?id=". $row['id_jadwal'] ."'>EDIT</a> | ";
-                                        echo "<a class='delete__btn' href='crud/delete.php?id=". $row['id_jadwal'] ."'>DELETE</a>";
+                                        echo "<a class='edit__btn btn' href='crud/edit.php?tabel=jadwal&jadwal_id=". $row['id_jadwal'] ."'>EDIT</a>";
+                                        echo "</td>";
+                                        echo "<td class='table__data'>";
+                                        echo "<a class='delete__btn btn' href='crud/delete.php?tabel=jadwal&jadwal_id=". $row['id_jadwal'] ."'>DELETE</a>";                                       
                                         echo "</td>";
                                         echo '</tr>';
                                         }
@@ -291,7 +300,8 @@ include "query/query.php";
                                             <th class="table__col">Waktu</th>
                                             <th class="table__col">Tanggal</th>
                                             <th class="table__col">Keterangan</th>
-                                            <th class="table__col">Aksi</th>
+                                            <th class="table__col">Edit</th>
+                                            <th class="table__col">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table__body__4">
@@ -308,8 +318,12 @@ include "query/query.php";
                                                 echo "<td class='table__data'>" . date('d-m-Y', strtotime($row['tanggal'])) . "</td>";
                                                 echo "<td class='table__data'>" . $row['new_keterangan'] . "</td>";
                                                 echo "<td class='table__data'>";
-                                                echo "<a class='edit__btn' href='crud/edit.php?id=". $row['id_absen'] ."'>EDIT</a> | ";
-                                                echo "<a class='delete__btn' href='crud/delete.php?id=". $row['id_absen'] ."'>DELETE</a>";
+                                                echo "<a class='edit__btn btn' href='crud/edit.php?tabel=absen&absen_id=". $row['id_absen'] ."'>EDIT</a>";
+                                               
+                                                echo "</td>";
+                                                echo "<td class='table__data'>";
+                                                echo "<a class='delete__btn btn' href='crud/delete.php?tabel=absen&absen_id=". $row['id_absen'] ."'>DELETE</a>";
+                                               
                                                 echo "</td>";
                                                 echo '</tr>';
                                             }
@@ -326,7 +340,7 @@ include "query/query.php";
                 </div>
                 <!-- <section class="add__data">
                     <div class="aksi">
-                        <a href="" class="add__btn btn">Tambahkan Siswa <i class="fa-regular fa-address-book"></i></a>              
+                        <a href="" class="add__btn btn btn btn">Tambahkan Siswa <i class="fa-regular fa-address-book"></i></a>              
                     </div>
                 </section> -->
                                         
