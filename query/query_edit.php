@@ -13,7 +13,11 @@ switch ($tabel) {
     case 'guru':
         // Query untuk mengambil data guru berdasarkan id
         $guru_id = $_GET['guru_id'];
-        $sql = "SELECT * FROM guru WHERE id_guru = ?";
+        $sql = "SELECT g.*, 
+            m.nama_mapel AS nama_mapel_g 
+            FROM guru g
+            JOIN mapel m ON g.id_mapel = m.id_mapel 
+            WHERE id_guru = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $guru_id);
         $stmt->execute();
@@ -24,14 +28,28 @@ switch ($tabel) {
         $form .= '<h2 class="Judul">Edit Data Guru</h2>';
         $form .= '<form class="form_container" method="POST" action="update.php">';
         $form .= '<input class="input" type="hidden" name="id_guru"  readonly>';
-        $form .= '<input class="input" type="text" name="nama" >';
+
+        $form .= '<div class="wrapper">';
+        $form .= '<input class="input" type="text" name="nama" required>';
+        $form .= '<label class="info">Nama</label>';
+        $form .= '</div>';
+
+
+
+        $form .= '<div class="wrapper wrapper__select">';
         $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin: </label>';
         $form .= '<select class="select" id="jenis_kelamin" name="jenis_kelamin">';
         $form .= '<option class="option" value="L" '. ($data['jenis_kelamin'] == 'L' ? 'selected' : '').'>Laki Laki</option>';
         $form .= '<option class="option" value="P" '. ($data['jenis_kelamin'] == 'P' ? 'selected' : '').'>Perempuan</option>';
         $form .= '</select>';
-        $form .= '<input class="input" type="text" name="alamat" >';
+        $form .= '</div>';
+
+
+
+        $form .= '<div class="wrapper">';
+        $form .= '<input class="input" type="text" name="alamat" required>';
         $form .= '<label for ="alamat" class="info">Alamat</label>';
+        $form .= '</div>';
         $form .= '<input class="input  btn" type="submit" value="Update">';
         $form .= '</form>';
         break;
@@ -47,7 +65,7 @@ switch ($tabel) {
                                    WHEN '11' THEN 'XI'
                                    WHEN '12' THEN 'XII'
                                    ELSE k.tingkatan
-                               END, ' ', k.jurusan, ' ', k.char) AS nama_kelas_s
+                               END, ' ', k.jurusan, ' ', k.abc) AS nama_kelas_s
                     FROM siswa s
                     JOIN kelas k ON s.id_kelas = k.id_kelas
                     WHERE s.id_siswa = ?";
@@ -64,11 +82,11 @@ switch ($tabel) {
                 $form .= '<input class="input" type="hidden" name="id_siswa"  readonly>';
                 
                 $form .= '<div class="wrapper">';
-                $form .= '<input class="input" id="nama" type="text" name="nama" >';
+                $form .= '<input class="input" id="nama" type="text" name="nama" required>';
                 $form .= '<label for="nama" class="info">Nama</label>';            // Dropdown untuk jenis kelamin
                 $form .= '</div>';
 
-                $form .= '<div class="wrapper">';
+                $form .= '<div class="wrapper wrapper__select">';
                 $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin:</label>';
                 $form .= '<select class="select" name="jenis_kelamin" id="jenis_kelamin">';
                 $form .= '<option class="option" value="L" ' . ($data['jenis_kelamin'] == 'L' ? 'selected' : '') . '>Laki-laki</option>';
@@ -76,7 +94,7 @@ switch ($tabel) {
                 $form .= '</select>';
                 $form .= '</div>';
         
-                $form .= '<div class="wrapper">';
+                $form .= '<div class="wrapper wrapper__select">';
                 $form .= '<label class="info-select" for="id_kelas">Kelas:</label>';
                 $form .= '<select class="select" name="id_kelas" id="id_kelas" required>';
 
@@ -84,14 +102,14 @@ switch ($tabel) {
                 $kelas_result = $conn->query($sql_kelas);
                 while ($kelas = $kelas_result->fetch_assoc()) {
                     $selected = ($kelas['id_kelas'] == $data['id_kelas']) ? 'selected' : '';
-                    $kelas_nama = $kelas['tingkatan'] . ' ' . $kelas['jurusan'] . ' ' . $kelas['char'];
+                    $kelas_nama = $kelas['tingkatan'] . ' ' . $kelas['jurusan'] . ' ' . $kelas['abc'];
                     $form .= "<option class='option' value='" . $kelas['id_kelas'] . "' $selected>$kelas_nama</option>";
                 }
                 $form .= '</select>';
                 $form.= '</div>';
                 
                 $form .= '<div class="wrapper">';
-                $form .= '<input class="input" id="alamat" type="text" name="alamat"  required>';
+                $form .= '<input class="input i__alamat" id="alamat" type="text" name="alamat"  required>';
                 $form .= '<label for ="alamat" class="info">Alamat</label>';
                 $form.= '</div>';
 

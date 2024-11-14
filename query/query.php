@@ -6,7 +6,7 @@ $sql_siswa= "SELECT s.*, CONCAT(
     WHEN '11' THEN 'XI'
     WHEN '12' THEN 'XII'
     ELSE k.tingkatan
-    END, ' ', k.jurusan, ' ', k.char) AS nama_kelas_s
+    END, ' ', k.jurusan, ' ', k.abc) AS nama_kelas_s
 FROM siswa s
 JOIN kelas k ON s.id_kelas = k.id_kelas
 ORDER BY id_siswa
@@ -27,7 +27,7 @@ CONCAT(
     WHEN '11' THEN 'XI'
     WHEN '12' THEN 'XII'
     ELSE k.tingkatan
-    END, ' ', k.jurusan, ' ', k.char) AS nama_kelas_j,
+    END, ' ', k.jurusan, ' ', k.abc) AS nama_kelas_j,
 m.nama_mapel AS nama_mapel_j
 
 FROM jadwal j

@@ -910,6 +910,9 @@ font-size: 1.25rem;
     
 }
 
+
+/* ================= BREAKPOINTS ======================= */
+
 body{
     display: flex;
     flex-direction: column;
@@ -924,7 +927,7 @@ body{
 .form_container{
     background-color: var(--container-color);
     box-shadow: 2px 2px 8px 2px hsla( 0, 0%, 100%, .2);
-    width: 25rem;
+    width: 35rem;
     height: 35rem;
     padding-block: 1.5rem;
     border-radius: 1rem;
@@ -978,4 +981,16 @@ body{
     background-color: #1a1a1a;
     padding-inline: .3rem;
     color: var(--first-color);
+}
+.wrapper__select{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+
+.btn{
+    text-align: center;
+    background-color: var(--first-color);
+    font-weight: var(--font-semi-bold);
+    cursor: pointer;
 }

@@ -48,6 +48,6 @@ function searchTable(){
     })
 
     document.querySelectorAll("tbody tr:not(.hide)").forEach((visible_row, i)=> {
-        visible_row.style.backgroundColor = (i % 2 == 0)? 'transparent' : ' hsl(0, 0%, 70%)'
+        visible_row.style.backgroundColor = (i % 2 == 0)? 'transparent' : ' hsl(0, 0%, 70%)';
     });
 }
