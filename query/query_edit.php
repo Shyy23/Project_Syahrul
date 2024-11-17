@@ -25,7 +25,7 @@ switch ($tabel) {
         // Menampilkan form untuk edit data guru
         $form .= '<h2 class="Judul">Edit Data Guru</h2>';
         $form .= '<form class="form_container" method="POST" action="update.php">';
-        $form .= '<input class="input" type="hidden" name="id_guru"  readonly>';
+        $form .= '<input class="input" type="hidden" name="id_guru" value="'.$data['id_guru'].'" readonly>';
 
         $form .= '<div class="wrapper">';
         $form .= '<input class="input" type="text" name="nama" value="'.$data['nama_guru_g'].'" required>';
@@ -37,8 +37,8 @@ switch ($tabel) {
         $form .= '<div class="wrapper wrapper__select">';
         $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin: </label>';
         $form .= '<select class="select" id="jenis_kelamin" name="jenis_kelamin">';
-        $form .= '<option class="option" value="L" '. ($data['jenis_kelamin'] == 'L' ? 'selected' : '').'>Laki Laki</option>';
-        $form .= '<option class="option" value="P" '. ($data['jenis_kelamin'] == 'P' ? 'selected' : '').'>Perempuan</option>';
+        $form .= '<option class="option" value="Laki-Laki" '. ($data['jenis_kelamin'] == 'Laki-Laki' ? 'selected' : '').'>Laki Laki</option>';
+        $form .= '<option class="option" value="Perempuan" '. ($data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '').'>Perempuan</option>';
         $form .= '</select>';
         $form .= '</div>';
 
@@ -50,7 +50,7 @@ switch ($tabel) {
         while ($mapel= $mapel_result->fetch_assoc()){
             $selected = ($mapel['id_mapel'] == $data['id_mapel'] ? 'selected' : '');
 
-            $form .= '<option class="option" value="'.$mapel['id_mapel'].'" '.$selected.'>'.$mapel['nama_mapel'].'</option>';
+            $form .= '<option class="option" value="'.$mapel['id_mapel'].'" ' .$selected. '>'.$mapel['nama_mapel'].'</option>';
 
         }
         $form .= '</select>';
@@ -80,7 +80,7 @@ switch ($tabel) {
                 // Menampilkan form untuk edit data siswa
                 $form .= '<h2 class="Judul">Edit Data Siswa</h2>';
                 $form .= '<form class="form_container" method="POST" action="update.php">';
-                $form .= '<input class="input" type="hidden" name="id_siswa"  readonly>';
+                $form .= '<input class="input" type="hidden" name="id_siswa" value="'.$data['id_siswa'].'" readonly>';
                 
                 $form .= '<div class="wrapper">';
                 $form .= '<input class="input" id="nama" type="text" name="nama" value="'.$data['nama'].'" required>';
@@ -90,8 +90,8 @@ switch ($tabel) {
                 $form .= '<div class="wrapper wrapper__select">';
                 $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin:</label>';
                 $form .= '<select class="select" name="jenis_kelamin" id="jenis_kelamin">';
-                $form .= '<option class="option" value="L" ' . ($data['jenis_kelamin'] == 'L' ? 'selected' : '') . '>Laki-laki</option>';
-                $form .= '<option class="option" value="P" ' . ($data['jenis_kelamin'] == 'P' ? 'selected' : '') . '>Perempuan</option>';
+                $form .= '<option class="option" value="Laki-Laki" ' . ($data['jenis_kelamin'] == 'Laki-Laki' ? 'selected' : '') . '>Laki-laki</option>';
+                $form .= '<option class="option" value="Perempuan" ' . ($data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '') . '>Perempuan</option>';
                 $form .= '</select>';
                 $form .= '</div>';
         
@@ -104,7 +104,7 @@ switch ($tabel) {
                 while ($kelas = $kelas_result->fetch_assoc()) {
                     $selected = ($kelas['id_kelas'] == $data['id_kelas']) ? 'selected' : '';
                     
-                    $form .= "<option class='option' value='" . $kelas['id_kelas'] . "' $selected>".$kelas['nama_kelas']."</option>";
+                    $form .= "<option class='option' value='" . $kelas['id_kelas'] . "' " .$selected. ">".$kelas['nama_kelas']."</option>";
                 }
                 $form .= '</select>';
                 $form.= '</div>';
@@ -122,7 +122,53 @@ switch ($tabel) {
                 echo "Terjadi kesalahan dalam query untuk siswa.";
             }
             break;
-    
+            
+        case 'jadwal':
+            $jadwal_id = $_GET['jadwal_id'];
+            $sql = "SELECT * FROM vJadwal WHERE id_jadwal = ?";
+
+        if  ($stmt = $conn->prepare($sql)){
+            $stmt->bind_param("i", $jadwal_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_assoc();
+
+            $form .= '<h2 class="judul">Edit Data Jadwal</h2>';
+            $form .= '<form class="form_container" method="POST" action="update.php">';
+            $form .= '<input class="input" type="hidden" name="id_jadwal" value="'.$data['id_jadwal'].'" readonly/>';
+
+            $form .= '<div class="wrapper">';
+            $form .= '<input class="input" id="nama_hari" type="text" name="nama_hari" value="'.$data['nama_hari_j'].'" required/>';
+            $form .= '<label for="nama_hari" class="info">Nama</label>';
+            $form .= '</div>';
+
+            $form .= '<div class="wrapper">';
+            $form .= '<input class="input" id="nama_guru" type="text" name="nama_guru" value="'.$data['nama_guru_j'].'" required/>';
+            $form .= '<label for="nama_guru" class="info">Nama</label>';
+            $form .= '</div>';
+
+            $form .= '<div class="wrapper wrapper__select">';
+            $form .= '<label class="info-select" for="kelas">Kelas</label>';
+            $form .= '<select class="select" name="kelas" id="kelas">';
+            $sql_kelas = "SELECT * FROM vKelas ORDER BY id_kelas";
+            $kelas_result = $conn->query($sql_kelas);
+            while($kelas = $kelas_result->fetch_assoc()){
+                $selected = ($kelas['id_kelas'] == $data['id_kelas'] ? 'selected' : '');
+                $form .= "<option class='option' name='kelas' value='".$kelas['id_kelas']."' ".$selected." >".$kelas['nama_kelas']."</option>";
+            }
+                        
+            $form .= '</select>';
+            $form .= '</div>';
+            
+
+            $form .= '</form>';
+            break;
+        } else {
+            echo "Terjadi kesalahan dalam query untuk jadwal.";
+        }
+
+
+            break;
     default:
         $form = "Tabel tidak dikenal.";
         break;

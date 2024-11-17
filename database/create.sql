@@ -183,7 +183,7 @@ FROM guru g
 JOIN mapel m ON g.id_mapel = m.id_mapel;
 
 CREATE OR REPLACE VIEW vJadwal AS 
-SELECT j.id_jadwal, h.nama_hari AS nama_hari_j, g.nama AS nama_guru_j, vK.nama_kelas AS nama_kelas_j, m.nama_mapel AS nama_mapel_j, jam_mulai, jam_selesai, aktif
+SELECT j.*,h.nama_hari AS nama_hari_j, g.nama AS nama_guru_j, vK.nama_kelas AS nama_kelas_j, m.nama_mapel AS nama_mapel_j
 FROM jadwal j
 JOIN hari h ON j.id_hari = h.id_hari
 JOIN guru g ON j.id_guru = g.id_guru
