@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2024 at 02:22 PM
+-- Generation Time: Nov 17, 2024 at 11:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -467,6 +467,7 @@ CREATE TABLE `vguru` (
 `id_guru` int(10)
 ,`nip` varchar(35)
 ,`nama_guru_g` varchar(100)
+,`id_mapel` int(11)
 ,`jenis_kelamin` varchar(9)
 ,`nama_mapel_g` varchar(100)
 ,`alamat_guru_g` text
@@ -480,13 +481,17 @@ CREATE TABLE `vguru` (
 --
 CREATE TABLE `vjadwal` (
 `id_jadwal` int(11)
+,`id_hari` int(11)
+,`id_guru` int(11)
+,`id_kelas` int(11)
+,`id_mapel` int(11)
+,`jam_mulai` time
+,`jam_selesai` time
+,`aktif` enum('aktif','tidak aktif')
 ,`nama_hari_j` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu')
 ,`nama_guru_j` varchar(100)
 ,`nama_kelas_j` varchar(115)
 ,`nama_mapel_j` varchar(100)
-,`jam_mulai` time
-,`jam_selesai` time
-,`aktif` enum('aktif','tidak aktif')
 );
 
 -- --------------------------------------------------------
@@ -513,6 +518,7 @@ CREATE TABLE `vsiswa` (
 `id_siswa` int(10)
 ,`nisn` varchar(10)
 ,`nama` varchar(100)
+,`id_kelas` int(5)
 ,`jenis_kelamin` varchar(9)
 ,`alamat` text
 ,`nama_kelas_s` varchar(115)
@@ -535,7 +541,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vguru`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vguru`  AS SELECT `g`.`id_guru` AS `id_guru`, `g`.`nip` AS `nip`, `g`.`nama` AS `nama_guru_g`, CASE `g`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `g`.`jenis_kelamin` END AS `jenis_kelamin`, `m`.`nama_mapel` AS `nama_mapel_g`, `g`.`alamat` AS `alamat_guru_g` FROM (`guru` `g` join `mapel` `m` on(`g`.`id_mapel` = `m`.`id_mapel`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vguru`  AS SELECT `g`.`id_guru` AS `id_guru`, `g`.`nip` AS `nip`, `g`.`nama` AS `nama_guru_g`, `g`.`id_mapel` AS `id_mapel`, CASE `g`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `g`.`jenis_kelamin` END AS `jenis_kelamin`, `m`.`nama_mapel` AS `nama_mapel_g`, `g`.`alamat` AS `alamat_guru_g` FROM (`guru` `g` join `mapel` `m` on(`g`.`id_mapel` = `m`.`id_mapel`)) ;
 
 -- --------------------------------------------------------
 
@@ -544,7 +550,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vjadwal`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vjadwal`  AS SELECT `j`.`id_jadwal` AS `id_jadwal`, `h`.`nama_hari` AS `nama_hari_j`, `g`.`nama` AS `nama_guru_j`, `vk`.`nama_kelas` AS `nama_kelas_j`, `m`.`nama_mapel` AS `nama_mapel_j`, `j`.`jam_mulai` AS `jam_mulai`, `j`.`jam_selesai` AS `jam_selesai`, `j`.`aktif` AS `aktif` FROM ((((`jadwal` `j` join `hari` `h` on(`j`.`id_hari` = `h`.`id_hari`)) join `guru` `g` on(`j`.`id_guru` = `g`.`id_guru`)) join `vkelas` `vk` on(`j`.`id_kelas` = `vk`.`id_kelas`)) join `mapel` `m` on(`j`.`id_mapel` = `m`.`id_mapel`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vjadwal`  AS SELECT `j`.`id_jadwal` AS `id_jadwal`, `j`.`id_hari` AS `id_hari`, `j`.`id_guru` AS `id_guru`, `j`.`id_kelas` AS `id_kelas`, `j`.`id_mapel` AS `id_mapel`, `j`.`jam_mulai` AS `jam_mulai`, `j`.`jam_selesai` AS `jam_selesai`, `j`.`aktif` AS `aktif`, `h`.`nama_hari` AS `nama_hari_j`, `g`.`nama` AS `nama_guru_j`, `vk`.`nama_kelas` AS `nama_kelas_j`, `m`.`nama_mapel` AS `nama_mapel_j` FROM ((((`jadwal` `j` join `hari` `h` on(`j`.`id_hari` = `h`.`id_hari`)) join `guru` `g` on(`j`.`id_guru` = `g`.`id_guru`)) join `vkelas` `vk` on(`j`.`id_kelas` = `vk`.`id_kelas`)) join `mapel` `m` on(`j`.`id_mapel` = `m`.`id_mapel`)) ;
 
 -- --------------------------------------------------------
 
@@ -562,7 +568,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vsiswa`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsiswa`  AS SELECT `s`.`id_siswa` AS `id_siswa`, `s`.`nisn` AS `nisn`, `s`.`nama` AS `nama`, CASE `s`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `s`.`jenis_kelamin` END AS `jenis_kelamin`, `s`.`alamat` AS `alamat`, `vk`.`nama_kelas` AS `nama_kelas_s`, `s`.`no_telepon` AS `no_telepon` FROM (`siswa` `s` join `vkelas` `vk` on(`s`.`id_kelas` = `vk`.`id_kelas`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsiswa`  AS SELECT `s`.`id_siswa` AS `id_siswa`, `s`.`nisn` AS `nisn`, `s`.`nama` AS `nama`, `s`.`id_kelas` AS `id_kelas`, CASE `s`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `s`.`jenis_kelamin` END AS `jenis_kelamin`, `s`.`alamat` AS `alamat`, `vk`.`nama_kelas` AS `nama_kelas_s`, `s`.`no_telepon` AS `no_telepon` FROM (`siswa` `s` join `vkelas` `vk` on(`s`.`id_kelas` = `vk`.`id_kelas`)) ;
 
 --
 -- Indexes for dumped tables
