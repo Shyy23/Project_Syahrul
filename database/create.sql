@@ -102,12 +102,103 @@ INSERT INTO `siswa` (`id_siswa`, `nisn`, `nama`, `jenis_kelamin`, `alamat`, `kel
 ALTER TABLE `siswa`
 ADD PRIMARY KEY (`id_siswa`);
 
+INSERT INTO `jurusan` (`nama_jurusan`) VALUES
+(UPPER('RPL')),
+(UPPER('TJKT')),
+(UPPER('AT')),
+(UPPER('BR')),
+(UPPER('TEI')),
+(UPPER('TKI')),
+(UPPER('AXIOO')),
+(UPPER('ORACLE')),
+(UPPER('GAMELAB'));
 
+INSERT INTO `abc` (`nama_abc`) VALUES 
+(UPPER('A')),
+(UPPER('B')),
+(UPPER('C'));
 
+INSERT INTO `kelas` (`tingkatan`, `id_jurusan`, `id_abc`) VALUES 
+('10', 1, 1),
+('10', 1, 2),
+('10', 2, 1),
+('10', 2, 2),
+('10', 3, 1),
+('10', 3, 2),
+('10', 4, 1),
+('10', 4, 2),
+('10', 5, 1),
+('10', 5, 2),
+('10', 6, 1),
+('10', 6, 2),
+('10', 6, 3),
+('10', 7, 1),
+('10', 9, 1),
+('11', 1, 1),
+('11', 1, 2),
+('11', 2, 1),
+('11', 2, 2),
+('11', 3, 1),
+('11', 3, 2),
+('11', 4, 1),
+('11', 4, 2),
+('11', 5, 1),
+('11', 6, 1),
+('11', 6, 2),
+('11', 7, 1),
+('11', 8, 1);
 
+CREATE OR REPLACE VIEW vKelas AS 
+ 
+SELECT k.id_kelas, k.tingkatan, j.nama_jurusan, abc.nama_abc, CONCAT(
+    CASE k.tingkatan
+    WHEN '10' THEN 'X'
+    WHEN '11' THEN 'XI'
+    WHEN '12' THEN 'XII'
+    ELSE k.tingkatan
+    END, ' ', j.nama_jurusan, ' ', abc.nama_abc
+) AS nama_kelas
+FROM kelas k
+JOIN jurusan j ON k.id_jurusan = j.id_jurusan
+JOIN abc ON k.id_abc = abc.id_abc
+ORDER BY k.id_kelas;
 
+CREATE OR REPLACE VIEW vSiswa AS
+SELECT s.id_siswa, s.nisn, s.nama, 
+CASE s.jenis_kelamin 
+WHEN 'L' THEN 'Laki-Laki'
+WHEN 'P' THEN 'Perempuan'
+ELSE s.jenis_kelamin
+END AS jenis_kelamin, s.alamat, vK.nama_kelas AS nama_kelas_s, s.no_telepon 
+FROM siswa s
+JOIN vKelas vK ON s.id_kelas = vK.id_kelas;
 
+CREATE OR REPLACE VIEW vGuru AS 
+SELECT g.id_guru, g.nip, g.nama AS nama_guru_g, CASE g.jenis_kelamin
+WHEN 'L' THEN 'Laki-Laki'
+WHEN 'P' THEN 'Perempuan'
+ELSE g.jenis_kelamin
+END AS jenis_kelamin , m.nama_mapel AS nama_mapel_g, g.alamat AS alamat_guru_g
+FROM guru g
+JOIN mapel m ON g.id_mapel = m.id_mapel;
 
+CREATE OR REPLACE VIEW vJadwal AS 
+SELECT j.id_jadwal, h.nama_hari AS nama_hari_j, g.nama AS nama_guru_j, vK.nama_kelas AS nama_kelas_j, m.nama_mapel AS nama_mapel_j, jam_mulai, jam_selesai, aktif
+FROM jadwal j
+JOIN hari h ON j.id_hari = h.id_hari
+JOIN guru g ON j.id_guru = g.id_guru
+JOIN vKelas vK ON j.id_kelas = vK.id_kelas
+JOIN mapel m ON j.id_mapel = m.id_mapel;
 
-
-
+CREATE OR REPLACE VIEW vAbsen AS
+SELECT a.id_absen , s.nama AS nama_siswa_a, vJ.nama_mapel_j AS nama_mapel_a, a.waktu, a.tanggal, CASE a.keterangan
+WHEN 'H' THEN 'Hadir'
+WHEN 'S' THEN 'Sakit'
+WHEN 'I' THEN 'Izin'
+WHEN 'A' THEN 'Alfa'
+WHEN 'T' THEN 'Terlambat'
+ELSE a.keterangan
+END AS keterangan_a
+FROM absen A
+JOIN siswa s ON a.id_siswa = s.id_siswa
+JOIN vJadwal vJ ON a.id_jadwal = vJ.id_jadwal;

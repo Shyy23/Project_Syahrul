@@ -223,10 +223,10 @@ include "query/query.php";
                                     while($row = $result_guru->fetch_assoc()){
                                         echo "<tr class='table__row'>";
                                         echo "<td class='table__data'>" . $no++ . "</td>";
-                                        echo "<td class='table__data'>" . $row['nama'] . "</td>";
+                                        echo "<td class='table__data'>" . $row['nama_guru_g'] . "</td>";
                                         echo "<td class='table__data'>" . $row['jenis_kelamin'] . "</td>";
                                         echo "<td class='table__data'>" . $row['nama_mapel_g'] . "</td>";
-                                        echo "<td class='table__data'>" . $row['alamat'] . "</td>";
+                                        echo "<td class='table__data'>" . $row['alamat_guru_g'] . "</td>";
                                         echo "<td class='table__data'>";
                                         echo "<a class='edit__btn btn' href='query/query_edit.php?tabel=guru&guru_id=". $row['id_guru'] ."'>EDIT</a>";
                                         echo "</td>";
@@ -316,7 +316,7 @@ include "query/query.php";
                                                 echo "<td class='table__data'>" . $row['nama_mapel_a'] . "</td>";
                                                 echo "<td class='table__data'>" . date('H:i', strtotime($row['waktu'])) . "</td>";
                                                 echo "<td class='table__data'>" . date('d-m-Y', strtotime($row['tanggal'])) . "</td>";
-                                                echo "<td class='table__data'>" . $row['new_keterangan'] . "</td>";
+                                                echo "<td class='table__data'>" . $row['keterangan_a'] . "</td>";
                                                 echo "<td class='table__data'>";
                                                 echo "<a class='edit__btn btn' href='query/query_edit.php?tabel=absen&absen_id=". $row['id_absen'] ."'>EDIT</a>";
                                                
