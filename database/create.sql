@@ -164,7 +164,7 @@ JOIN abc ON k.id_abc = abc.id_abc
 ORDER BY k.id_kelas;
 
 CREATE OR REPLACE VIEW vSiswa AS
-SELECT s.id_siswa, s.nisn, s.nama, 
+SELECT s.id_siswa, s.nisn, s.nama,s.id_kelas, 
 CASE s.jenis_kelamin 
 WHEN 'L' THEN 'Laki-Laki'
 WHEN 'P' THEN 'Perempuan'
@@ -174,7 +174,7 @@ FROM siswa s
 JOIN vKelas vK ON s.id_kelas = vK.id_kelas;
 
 CREATE OR REPLACE VIEW vGuru AS 
-SELECT g.id_guru, g.nip, g.nama AS nama_guru_g, CASE g.jenis_kelamin
+SELECT g.id_guru, g.nip, g.nama AS nama_guru_g, g.id_mapel, CASE g.jenis_kelamin
 WHEN 'L' THEN 'Laki-Laki'
 WHEN 'P' THEN 'Perempuan'
 ELSE g.jenis_kelamin
