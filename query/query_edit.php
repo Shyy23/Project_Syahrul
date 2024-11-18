@@ -16,7 +16,7 @@ switch ($tabel) {
         $sql = "SELECT *
             FROM vGuru
             WHERE id_guru = ?";
-        $stmt = $conn->prepare($sql);
+        if($stmt = $conn->prepare($sql)){
         $stmt->bind_param("i", $guru_id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -35,7 +35,7 @@ switch ($tabel) {
 
 
         $form .= '<div class="wrapper wrapper__select">';
-        $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin: </label>';
+        $form .= '<label class="info-select stacked" for="jenis_kelamin">Jenis Kelamin: </label>';
         $form .= '<select class="select" id="jenis_kelamin" name="jenis_kelamin">';
         $form .= '<option class="option" value="Laki-Laki" '. ($data['jenis_kelamin'] == 'Laki-Laki' ? 'selected' : '').'>Laki Laki</option>';
         $form .= '<option class="option" value="Perempuan" '. ($data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '').'>Perempuan</option>';
@@ -43,7 +43,7 @@ switch ($tabel) {
         $form .= '</div>';
 
         $form .='<div class="wrapper wrapper__select">';
-        $form .= '<label class="info-select" for="mapel">Mata Pelajaran: </label>';
+        $form .= '<label class="info-select stacked" for="mapel">Mata Pelajaran: </label>';
         $form .= '<select class="select" id="mapel" name="mapel">';
         $sql_mapel = 'SELECT * FROM mapel ORDER BY id_mapel';
         $mapel_result = $conn->query($sql_mapel);
@@ -63,7 +63,10 @@ switch ($tabel) {
         $form .= '<input class="input  btn" type="submit" value="Update">';
         $form .= '</form>';
         break;
-
+    } else{
+        echo "Terjadi kesalahan dalam query guru";
+    }
+    break;
         case 'siswa':
             // Query untuk mengambil data siswa berdasarkan id
             $siswa_id = $_GET['siswa_id'];
@@ -88,7 +91,7 @@ switch ($tabel) {
                 $form .= '</div>';
 
                 $form .= '<div class="wrapper wrapper__select">';
-                $form .= '<label class="info-select" for="jenis_kelamin">Jenis Kelamin:</label>';
+                $form .= '<label class="info-select stacked" for="jenis_kelamin">Jenis Kelamin:</label>';
                 $form .= '<select class="select" name="jenis_kelamin" id="jenis_kelamin">';
                 $form .= '<option class="option" value="Laki-Laki" ' . ($data['jenis_kelamin'] == 'Laki-Laki' ? 'selected' : '') . '>Laki-laki</option>';
                 $form .= '<option class="option" value="Perempuan" ' . ($data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '') . '>Perempuan</option>';
@@ -96,7 +99,7 @@ switch ($tabel) {
                 $form .= '</div>';
         
                 $form .= '<div class="wrapper wrapper__select">';
-                $form .= '<label class="info-select" for="id_kelas">Kelas:</label>';
+                $form .= '<label class="info-select stacked" for="id_kelas">Kelas:</label>';
                 $form .= '<select class="select" name="id_kelas" id="id_kelas"   required>';
 
                 $sql_kelas = "SELECT * FROM vKelas ORDER BY id_kelas";
@@ -139,7 +142,7 @@ switch ($tabel) {
 
             $form .= '<div class="wrapper">';
             $form .= '<input class="input" id="nama_hari" type="text" name="nama_hari" value="'.$data['nama_hari_j'].'" required/>';
-            $form .= '<label for="nama_hari" class="info">Nama</label>';
+            $form .= '<label for="nama_hari" class="info">hari</label>';
             $form .= '</div>';
 
             $form .= '<div class="wrapper">';
@@ -148,7 +151,7 @@ switch ($tabel) {
             $form .= '</div>';
 
             $form .= '<div class="wrapper wrapper__select">';
-            $form .= '<label class="info-select" for="kelas">Kelas</label>';
+            $form .= '<label class="info-select stacked" for="kelas">Kelas</label>';
             $form .= '<select class="select" name="kelas" id="kelas">';
             $sql_kelas = "SELECT * FROM vKelas ORDER BY id_kelas";
             $kelas_result = $conn->query($sql_kelas);
@@ -160,14 +163,53 @@ switch ($tabel) {
             $form .= '</select>';
             $form .= '</div>';
             
+            $form .= '<div class="wrapper wrapper__select">';
+            $form .= '<label class="info-select stacked" for="mapel">Mata pelajaran</label>';
+            $form .= '<select class="select" name="mapel" id="mapel">';
+            $sql_mapel = "SELECT * FROM mapel ORDER BY id_mapel";
+            $mapel_result = $conn->query( $sql_mapel);
+            while($mapel = $mapel_result->fetch_assoc()){
+                $selected = ($mapel['id_mapel'] == $data['id_mapel'] ? 'selected' : '');
+                $form .= '<option class="option" name="mapel" value="'.$mapel['id_mapel'].'" '.$selected.'>'.$mapel['nama_mapel'].'</option>';
+            }
+            $form .= '</select>';
+            $form .= '</div>';
+
+
+            $form .= '<div class="wrapper wrapper__jam">';
+            $form .= '<div class="content_jam">';
+            $jam_mulai = date('H:i', strtotime($data['jam_mulai']));
+            $form .= '<input class="input input-jam" type="time" name="jam_mulai" id="jam_mulai" value="'.$jam_mulai.'"  required/>';
+            $form .= '<label class="info info-jam mulai stacked" for="jam_mulai">Jam Mulai</label>';
+            $form .= '</div>';
+            $form .= '<div class="content_jam">';
+            $jam_selesai = date('H:i', strtotime($data['jam_selesai']));
+            $form .= '<input class="input input-jam" type="time" name="jam_selesai" id="jam_selesai" value="'.$jam_selesai.'"  required/>';
+            $form .= '<label class="info info-jam selesai stacked" for="jam_selesai">Jam Selesai</label>';
+            $form .= '</div>';
+            $form .= '</div>';
 
             $form .= '</form>';
             break;
         } else {
             echo "Terjadi kesalahan dalam query untuk jadwal.";
         }
+            break;
+        case 'absen':
+            $absen_id = $_GET['absen_id'];
+            $sql = "SELECT * FROM vAbsen WHERE id_absen = ?";
 
+            if($stmt = $conn->prepare($sql)){
+                $stmt->bind_param("i", $absen_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $data = $result->fetch_assoc();
 
+                $form .= '<h2 class="judul">Edit Presensi Siswa</h2>';
+                break;
+            }else{
+                echo "terjadi kesalah falam query untuk absen";
+            }
             break;
     default:
         $form = "Tabel tidak dikenal.";

@@ -981,7 +981,7 @@ body{
 
 .input:is(:focus, :valid) ~ label {
     transform: translateY(-120%) scale(0.7);
-    background-color: #1a1a1a;
+    background-color: var(--container-color);
     padding-inline: .3rem;
     color: var(--first-color);
 }
@@ -997,3 +997,59 @@ body{
     font-weight: var(--font-semi-bold);
     cursor: pointer;
 }
+
+.info-select{
+    position: absolute;
+    top: 1rem;
+    left: .1rem;
+    pointer-events: none;
+    color: #d4d4d4;
+    transition: cubic-bezier(0.4, 0 , 0.2, 1);
+    white-space: nowrap;
+}
+
+.input-jam ~ .info-jam {
+    position: absolute;
+    
+    left: 0.5rem;
+    pointer-events: none;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-jam ~ .info-jam.stacked,
+.input-jam:is(:focus, :valid) ~ .info-jam {
+    transform: translateY(-120%) scale(0.7);
+    background-color: var(--container-color);
+    padding-inline: 0.3rem;
+    color: var(--first-color);
+}
+.input-jam ~ .info-jam.stacked,
+.input-jam:is(:focus, :valid) ~ .info-jam {
+    transform: translateY(-120%) scale(0.7);
+    background-color: var(--container-color);
+    padding-inline: 0.3rem;
+    color: var(--first-color);
+}
+
+.select:is(:focus, :valid) ~ .info-select, .info-select.stacked{
+    transform: translateY(-120%) scale(.7);
+    background-color: var(--container-color);
+    padding-inline: .3rem;
+    color: var(--first-color);
+}
+
+.info-jam{
+    white-space: nowrap;
+}
+.content_jam {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper__jam{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
