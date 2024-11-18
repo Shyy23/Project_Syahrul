@@ -206,6 +206,9 @@ switch ($tabel) {
                 $data = $result->fetch_assoc();
 
                 $form .= '<h2 class="judul">Edit Presensi Siswa</h2>';
+                $form .= '<form class="form_container" method="POST" action="">';
+                $form .= '<input type="hidden" class="input" name="id_absen" value="'.$data['id_absen'].'" readonly>';
+                $form .= '</form>';
                 break;
             }else{
                 echo "terjadi kesalah falam query untuk absen";
