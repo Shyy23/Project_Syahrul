@@ -140,14 +140,28 @@ switch ($tabel) {
             $form .= '<form class="form_container" method="POST" action="update.php">';
             $form .= '<input class="input" type="hidden" name="id_jadwal" value="'.$data['id_jadwal'].'" readonly/>';
 
-            $form .= '<div class="wrapper">';
-            $form .= '<input class="input" id="nama_hari" type="text" name="nama_hari" value="'.$data['nama_hari_j'].'" required/>';
-            $form .= '<label for="nama_hari" class="info">hari</label>';
+            $form .= '<div class="wrapper wrapper__select">';
+            $form .= '<label for="nama_hari" class="info-select stacked">Hari</label>';
+            $form .= '<select class ="select" name="hari" id="hari">';
+            $sql_hari = "SELECT * FROM hari ORDER BY id_hari";
+            $hari_result = $conn->query($sql_hari);
+            while($hari = $hari_result->fetch_assoc()){
+                $selected = ($hari['id_hari'] == $data['id_hari'] ? 'selected' : '');
+                $form .= '<option class="option" name="hari" value="'.$hari['id_hari'].'" '.$selected.'>'.$hari['nama_hari'].'</option>';
+            }
+            $form .= '</select>';
             $form .= '</div>';
 
-            $form .= '<div class="wrapper">';
-            $form .= '<input class="input" id="nama_guru" type="text" name="nama_guru" value="'.$data['nama_guru_j'].'" required/>';
-            $form .= '<label for="nama_guru" class="info">Nama</label>';
+            $form .= '<div class="wrapper wrapper__select">';
+            $form .= '<label for="nama_guru" class="info-select stacked">Nama</label>';
+            $form .= '<select class="select" name="nama_guru" id="nama_guru">';
+            $sql_guru = 'SELECT * FROM vGuru ORDER BY id_guru';
+            $guru_result = $conn->query($sql_guru);
+            while($guru=$guru_result->fetch_assoc()){
+                $selected = ($guru['id_guru'] == $data['id_guru'] ? 'selected' : '');
+                $form .= '<option class="option" name="nama_guru" value="'.$guru['id_guru'].'">'.$guru['nama_guru_g'].'</option>';
+            }
+            $form .= '</select>';
             $form .= '</div>';
 
             $form .= '<div class="wrapper wrapper__select">';
@@ -189,6 +203,7 @@ switch ($tabel) {
             $form .= '</div>';
             $form .= '</div>';
 
+            $form .= '<input type="submit" class="input btn" value="update">';
             $form .= '</form>';
             break;
         } else {
@@ -197,7 +212,7 @@ switch ($tabel) {
             break;
         case 'absen':
             $absen_id = $_GET['absen_id'];
-            $sql = "SELECT * FROM vAbsen WHERE id_absen = ?";
+            $sql = "SELECT *, vJ.id_mapel FROM vAbsen vA JOIN vJadwal vJ ON vA.id_jadwal = vJ.id_jadwal  WHERE id_absen = ?";
 
             if($stmt = $conn->prepare($sql)){
                 $stmt->bind_param("i", $absen_id);
@@ -206,12 +221,53 @@ switch ($tabel) {
                 $data = $result->fetch_assoc();
 
                 $form .= '<h2 class="judul">Edit Presensi Siswa</h2>';
-                $form .= '<form class="form_container" method="POST" action="">';
+                $form .= '<form class="form_container  center" method="POST" action="">';
                 $form .= '<input type="hidden" class="input" name="id_absen" value="'.$data['id_absen'].'" readonly>';
+                
+                $form .= '<div class="wrapper acenter">';
+                $form .= '<input class="input read" type="text" name="nama_siswa" id="nama_siswa" value="'.$data['nama_siswa_a'].'" readonly>';
+                $form .= '<label class="info info-read stacked" for="nama_siswa">Nama Siswa</label>';
+                $form .= '</div>';
+
+                $form .= '<div class="wrapper wrapper__ginput">';
+                $form .= '<div class="content__ginput">';
+                $form .= '<label class="info-select stacked" for="mapel">Mapel</label>';
+                $form .= '<select class="select" name="mapel" id="mapel">';
+                $sql_mapel = 'SELECT * FROM mapel ORDER BY id_mapel';
+                $mapel_result = $conn->query($sql_mapel);
+                while($mapel = $mapel_result->fetch_assoc()){
+                    $selected = ($mapel['id_mapel'] == $data['id_mapel'] ? 'selected' : '');
+                    $form .= '<option class="option" name="mapel" value="'.$mapel['id_mapel'].'">'.$mapel['nama_mapel'].'</option>';
+                }
+                $form .= '</select>';
+                $form .= '</div>';
+                $form .= '<div class="content__ginput">';
+                $form .= '<label class="info info-select stacked" for="keterangan">Keterangan</label>';
+                $form .= '<select class="select" name="keterangan" id="keterangan">';
+                
+                $form .= '</select>';
+                $form .= '</div>';
+                $form .= '</div>';
+
+                $form .= '<div class="wrapper wrapper__jam">';
+                $form .= '<div class="content_jam">';
+                $waktu = date('H:i', strtotime($data['waktu']));
+                $form .= '<input class="input input-jam" type="time" name="waktu" id="waktu" value="'.$waktu.'" readonly>';
+                $form .= '<label class="info info-jam waktu stacked" for="waktu">Waktu</label>';
+                $form .= '</div>';
+                $form .= '<div class="content_jam">';
+                $tanggal =  date('Y-m-d', strtotime($data['tanggal']));
+                $form .= '<input class="input input-jam" type="date" name="tanggal" id="tanggal" value="'.$tanggal.'" readonly>';
+                $form .= '<label class="info info-jam tanggal stacked" for="tanggal">Tanggal</label>';
+                $form .= '</div>';
+                $form .= '</div>';
+
+
+                $form .= '<input class="input btn" type="submit" value="update">';
                 $form .= '</form>';
                 break;
             }else{
-                echo "terjadi kesalah falam query untuk absen";
+                echo "terjadi kesalah dalam query untuk absen";
             }
             break;
     default:

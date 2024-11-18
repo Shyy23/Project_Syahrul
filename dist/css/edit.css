@@ -998,7 +998,7 @@ body{
     cursor: pointer;
 }
 
-.info-select{
+.info-select, .info-read{
     position: absolute;
     top: 1rem;
     left: .1rem;
@@ -1008,7 +1008,8 @@ body{
     white-space: nowrap;
 }
 
-.input-jam ~ .info-jam {
+.input-jam ~ .info-jam,
+.read ~ .info-read {
     position: absolute;
     
     left: 0.5rem;
@@ -1017,7 +1018,9 @@ body{
 }
 
 .input-jam ~ .info-jam.stacked,
-.input-jam:is(:focus, :valid) ~ .info-jam {
+.input-jam:is(:focus, :valid) ~ .info-jam ,
+.read ~ .info-read.stacked,
+.read:is(:focus, :valid) ~ .info-read {
     transform: translateY(-120%) scale(0.7);
     background-color: var(--container-color);
     padding-inline: 0.3rem;
@@ -1041,15 +1044,26 @@ body{
 .info-jam{
     white-space: nowrap;
 }
-.content_jam {
+.content_jam , .content__ginput{
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-.wrapper__jam{
+.wrapper__jam, .wrapper__ginput{
     display: flex;
     flex-direction: row;
     gap: 1rem;
+}
+
+.center{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.acenter{
+    align-self: center;
+    justify-self: center;
 }
 

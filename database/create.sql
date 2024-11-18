@@ -191,7 +191,7 @@ JOIN vKelas vK ON j.id_kelas = vK.id_kelas
 JOIN mapel m ON j.id_mapel = m.id_mapel;
 
 CREATE OR REPLACE VIEW vAbsen AS
-SELECT a.id_absen , s.nama AS nama_siswa_a, vJ.nama_mapel_j AS nama_mapel_a, a.waktu, a.tanggal, CASE a.keterangan
+SELECT a.id_absen , a.id_jadwal, a.id_jadwal,s.nama AS nama_siswa_a, vJ.nama_mapel_j AS nama_mapel_a, a.waktu, a.tanggal, CASE a.keterangan
 WHEN 'H' THEN 'Hadir'
 WHEN 'S' THEN 'Sakit'
 WHEN 'I' THEN 'Izin'
