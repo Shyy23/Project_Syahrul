@@ -1067,3 +1067,8 @@ body{
     justify-self: center;
 }
 
+.content__ginput .input,
+.content__ginput .select{
+    width: min(100%, 10rem);
+}
+
