@@ -26,14 +26,7 @@ $sql_kelass = "SELECT * FROM vKelas ORDER BY id_kelas";
 $stmt_kelass = $conn->prepare($sql_kelass);
 $stmt_kelass->execute();
 $result_kelass = $stmt_kelass->get_result();
-if($result_kelass -> num_rows > 0){
-    $kelass_data= [];
-    while($data = $result__kelas->fetch_assoc()){
-        $kelas_data[] = $data;
-    }
-}else {
-    $kelas_data = [];
-}
+
 
 $sql_kelas = "SELECT * FROM kelas ORDER BY id_kelas";
 $stmt_kelas = $conn->prepare($sql_kelas);
