@@ -155,6 +155,12 @@ include "query/query.php";
                     </div>
                    
                     </section>
+
+                    <section class="table__header">
+                        <a id="addButton" class="add__btn" href="query/query_add.php?tabel=siswa" >Tambah Siswa <i class="fa-solid fa-plus icon" ></i></a>
+                        
+                    </section>
+
                     <section class="table__body content__box">
                         <div class="content active content__1">
                             

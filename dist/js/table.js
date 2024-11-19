@@ -1,6 +1,15 @@
 const tabs = document.querySelectorAll('.tab__btn');
 const contents = document.querySelectorAll('.content');
 const line = document.querySelector('.line');   
+const addButton = document.getElementById('addButton');
+
+const tabData = [
+    {name:'Siswa', href:'query_add.php?tabel=siswa'},
+    {name:'Guru', href:'query_add.php?tabel=guru'},
+    {name:'Jadwal', href:'query_add.php?tabel=jadwal'},
+    {name:'Presensi', href:'query_add.php?tabel=presensi'},
+]
+
 function updateLinePosition(activeTab){
     line.style.width = activeTab.offsetWidth + 'px';
     line.style.left = activeTab.offsetLeft + 'px';
@@ -15,6 +24,9 @@ tabs.forEach((tab, index) => {
 
        contents.forEach(content => {content.classList.remove('active')});
        contents[index].classList.add('active');
+
+        addButton.innerHTML = `Tambah ${tabData[index].name} <i class="fa-solid fa-plus icon" ></i>`;
+        addButton.href = tabData[index].href;
     });
 });
 

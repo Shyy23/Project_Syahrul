@@ -68,7 +68,11 @@ div.table{
     /* overflow-y: hidden; */
 }
 
-
+.table__header{
+    position: absolute;
+    top: 7rem;
+    padding-inline: 2rem;
+}
 
 
 
@@ -101,6 +105,14 @@ thead, th{
     visibility: visible;
 }
 
+.add__btn{
+    color: var(--title-color);
+    transition: color .4s;
+    font-weight: var(--font-medium);
+}
+.add__btn:hover{
+    color: var(--first-color);
+}
 table{
     width: 100%;
 }
@@ -155,7 +167,7 @@ tbody tr:hover{
 /* ==================================================== */
 .content__box{
     position: absolute;
-    top: 6rem;
+    top: 9rem;
     text-align: center;
 }
 
