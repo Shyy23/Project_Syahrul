@@ -13,7 +13,7 @@ include '../query/query_add.php';
 </head>
 <body>
     <h2 class="judul">Tambah Data <?= ucfirst($tabel)?> </h2>
-    <form action="proses.php" method="POST" class="form_container form__add">
+    <form action="../query/query_proses.php" method="POST" class="form_container form__add">
         <input type="hidden" name="tabel" value="<?= $tabel?>">
         <?php foreach ($formFields as $name => $field):?>
             <?php if($field['type'] === 'select'):?>
@@ -40,7 +40,8 @@ include '../query/query_add.php';
                 </div>
             <?php elseif($field['type'] === 'time'):?>
                 <div class="wrapper">
-                    input.input
+                    <input type="<?= $field['type']?>" class="input input-jam" name="<?= $name?>" id="<?= $name?>" required>
+                    <label for="<?= $name?>" class="info info-jam waktu stacked"><?= $field['label']?></label>
                 </div>
             <?php else:?>
                 <div class="wrapper">

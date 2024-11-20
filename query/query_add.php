@@ -17,6 +17,39 @@ if ($result_kelass->num_rows > 0) {
     }
 }
 
+$hari_data = [];
+$sql_hari = "SELECT * FROM hari ORDER BY id_hari";
+$stmt_hari = $conn->prepare($sql_hari);
+$stmt_hari->execute();
+$result_hari = $stmt_hari->get_result();
+if($result_hari->num_rows > 0){
+    while ($data = $result_hari->fetch_assoc()) {
+        $hari_data[] = ['value' => $data['id_hari'], 'label' => $data['nama_hari']];
+    }
+}
+
+$mapel_data = [];
+$sql_mapel = "SELECT * FROM mapel ORDER BY id_mapel";
+$stmt_mapel = $conn->prepare($sql_mapel);
+$stmt_mapel->execute();
+$result_mapel = $stmt_mapel->get_result();
+if ($result_mapel->num_rows > 0){
+    while ($data = $result_mapel->fetch_assoc()){
+        $mapel_data[] = ['value' => $data['id_mapel'], 'label' => $data['nama_mapel']];
+    }
+}
+
+$guru_data = [];
+$sql_guruu="SELECT * FROM vGuru ORDER BY id_guru";
+$stmt_guruu = $conn->prepare($sql_guruu);
+$stmt_guruu->execute();
+$result_guruu = $stmt_guruu->get_result();
+if($result_guruu->num_rows > 0){
+    while ($data = $result_guruu->fetch_assoc()){
+        $guru_data[] = ['value' => $data['id_guru'], 'label'=> $data['nama_guru_g']];
+    }
+}
+
 $tabel = isset($_GET['tabel']) ? $_GET['tabel'] : '';
 $formFields=[];
 
@@ -32,6 +65,26 @@ case 'siswa':
         'no_telepon' => ['label' => 'No Telepon', 'type' => 'text', ],
         'password' => ['label' => 'Password', 'type' => 'password']
 
+    ];
+    break;
+case 'guru':
+    $formFields = [
+        'nip' => ['label' => 'NIP', 'type' => 'text'],
+        'nama_guru' => ['label' => 'Nama Siswa', 'type' => 'text'],
+        'jenis_kelamin' => ['label' => 'Jenis Kelamin', 'type' => 'select', 'options' => ['L' => 'Laki Laki', 'P' => 'Perempuan']],
+        'mapel' => ['label' => 'Mapel', 'type' => 'select', 'options' => $mapel_data],
+        'alamat' => ['label' => 'Alamat', 'type' => 'text'],
+        'password' => ['label' => 'Password', 'type' => 'password']
+    ];
+    break;
+case 'jadwal':
+    $formFields = [
+        'hari' => ['label' => 'Hari', 'type' => 'select', 'options' => $hari_data],
+        'guru' => ['label' => 'Guru', 'type' => 'select', 'options' => $guru_data],
+        'kelas' => ['label' => 'Kelas', 'type' => 'select', 'options' => $kelass_data],
+        'mapel' => ['label' => 'Mata Pelajaran', 'type' => 'select', 'options' => $mapel_data],
+        'jam_mulai' => ['label' => 'Jam Mulai', 'type' => 'time'],
+        'jam_selesai' => ['label' => 'Jam Selesai', 'type' => 'time']
     ];
     break;
  default:
