@@ -1,6 +1,8 @@
 <?php
 include '../koneksi.php';
 include '../query/query_add.php';
+date_default_timezone_set('Asia/Jakarta');
+
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +40,26 @@ include '../query/query_add.php';
                     <input type="password" class="input add" name="<?= $name?>" id="<?= $name?>" required>
                     <label for="<?= $name?>" class="info"><?= $field['label']?></label>
                 </div>
+            <?php elseif($field['type'] === 'time' && $field['auto'] === 'true'):?>
+                <div class="wrapper">
+                    <input type="time" class="input input-jam input-add" name="<?= $name?>" id="<?= $name?>" value="<?= date('H:i')?>" step="60" required> 
+                    <label for="<?= $name?>" class="info info-jam waktu stacked"></label>
+                </div>
             <?php elseif($field['type'] === 'time'):?>
                 <div class="wrapper">
-                    <input type="time" class="input input-jam" name="<?= $name?>" id="<?= $name?>" required>
+                    <input type="time" class="input input-jam input-add" name="<?= $name?>" id="<?= $name?>" step="60" required>
                     <label for="<?= $name?>" class="info info-jam waktu stacked"><?= $field['label']?></label>
+                </div>
+            <?php elseif($field['type']==='date' && $field['auto']==='true'):?>
+                <div class="wrapper">
+                    <input type="<?= $field['type'] ?>" class="input add" id="<?= $name?>" name="<?= $name?>" value="<?= date('Y-m-d')?>" required>
+                    <label for="<?= $name?>" class="info"><?= $field['label']?></label>
+                </div>
+            <?php elseif($field['type']==='date'):?>
+                <div class="wrapper">
+                    <input type="date" class="input input-jam input-add" name="<?= $name?>" id="<?= $name?>" required>
+                    <label for="<?= $name?>" class="info info-jam tanggal stacked"><?= $field['label']?></label>
+
                 </div>
             <?php else:?>
                 <div class="wrapper">

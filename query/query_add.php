@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+date_default_timezone_set('Asia/Jakarta');
 
 
 $sql_siswa = "SELECT * FROM siswa";
@@ -50,6 +51,62 @@ if($result_guruu->num_rows > 0){
     }
 }
 
+$siswa_data= [];
+$sql_siswaa = "SELECT * FROM siswa ORDER BY id_siswa";
+$stmt_siswaa = $conn->prepare($sql_siswaa);
+$stmt_siswaa->execute();
+$result_siswaa = $stmt_siswaa->get_result();
+if($result_siswaa->num_rows > 0){
+    while($data = $result_siswaa->fetch_assoc()){
+        $siswa_data[] = ['value' => $data['id_siswa'], 'label'=>$data['nama']];
+    }
+}
+
+$mapelPresensi_data = [];
+$sql_mapelPresensi = "SELECT DISTINCT nama_mapel_a, id_jadwal FROM vAbsen ORDER BY nama_mapel_a";
+$stmt_mapelP = $conn->prepare($sql_mapelPresensi);
+$stmt_mapelP->execute();
+$result_mapelP = $stmt_mapelP->get_result();
+if($result_mapelP->num_rows > 0){
+    while($data = $result_mapelP->fetch_assoc()){
+        $mapelPresensi_data[] = ['value' => $data['id_jadwal'], 'label'=> $data['nama_mapel_a']];
+    } 
+} else {
+    echo 'Data tidak ditemukan';
+}
+
+$jadAbsen_data = [];
+$sql_jadAbsen = "SELECT * FROM vJadAbsen ORDER BY id_jadwal";
+$stmt_jadAbsen = $conn->prepare($sql_jadAbsen);
+if($stmt_jadAbsen->execute()){
+    $result_jadAbsen = $stmt_jadAbsen->get_result();
+    if($result_jadAbsen->num_rows > 0){
+        while($data = $result_jadAbsen->fetch_assoc()){
+            $jadAbsen_data[] = ['value' => $data['id_jadwal'], 'label' => $data['nama_mapel']];
+        }
+    }else{
+        echo 'Data jadwal absensi tidak ditemukan';
+    }
+}else{
+    echo 'Gagal menjalankan query';
+}
+
+$keterangan_data = [];
+$sql_keterangan = "SELECT DISTINCT keterangan_a, keterangan FROM vAbsen ORDER BY keterangan";
+$stmtKeterangan = $conn->prepare($sql_keterangan);
+if($stmtKeterangan->execute()){
+    $result_keterangan = $stmtKeterangan->get_result();
+    if($result_keterangan->num_rows > 0){
+        while($data = $result_keterangan->fetch_assoc()){
+            $keterangan_data[] = ['value' => $data['keterangan'], 'label' => $data['keterangan_a']];
+        }
+    } else {
+        echo 'Data keterangan tidak ditemukan';
+    }
+} else {
+    echo 'Gagal menjalankan query';
+}
+
 $tabel = isset($_GET['tabel']) ? $_GET['tabel'] : '';
 $formFields=[];
 
@@ -83,12 +140,23 @@ case 'jadwal':
         'guru' => ['label' => 'Guru', 'type' => 'select', 'options' => $guru_data],
         'kelas' => ['label' => 'Kelas', 'type' => 'select', 'options' => $kelass_data],
         'mapel' => ['label' => 'Mata Pelajaran', 'type' => 'select', 'options' => $mapel_data],
-        'jam_mulai' => ['label' => 'Jam Mulai', 'type' => 'time'],
-        'jam_selesai' => ['label' => 'Jam Selesai', 'type' => 'time']
+        'jam_mulai' => ['label' => 'Jam Mulai', 'type' => 'time', 'auto' => 'false'],
+        'jam_selesai' => ['label' => 'Jam Selesai', 'type' => 'time', 'auto' => 'false']
+    ];
+    break;
+case 'presensi':
+    $formFields = [
+        'siswa' => ['label' => 'Nama Siswa', 'type' => 'select', 'options' => $siswa_data],
+        'jadwal' => ['label' => 'Mapel', 'type'=> 'select', 'options'=> $jadAbsen_data],
+        'waktu' => ['label' => 'Waktu', 'type'=> 'time', 'auto'=>'true'],
+        'tanggal' => ['label'=> 'Tanggal', 'type'=>'date', 'auto'=>'true'],
+        'keterangan' => ['label'=> 'Keterangan', 'type'=> 'select', 'options'=>$keterangan_data],
+
     ];
     break;
  default:
  die('tabel tidak ditemukan.');
+ 
 
 
 }

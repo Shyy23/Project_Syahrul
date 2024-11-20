@@ -1082,7 +1082,7 @@ body{
     width: min(100%, 10rem);
 }
 
-/* ADD  */
+/* ADD CSS */
 
 .form__add{
     width: min(95vw, 80rem);
@@ -1113,5 +1113,8 @@ body{
     box-shadow: inset 1px 1px 4px var(--white-color),
                 2px 2px 4px var(--first-color) ;
 
+}
+.input-add{
+    width: calc(17rem - 2rem);
 }
 

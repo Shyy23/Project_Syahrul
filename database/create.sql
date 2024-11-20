@@ -198,7 +198,12 @@ WHEN 'I' THEN 'Izin'
 WHEN 'A' THEN 'Alfa'
 WHEN 'T' THEN 'Terlambat'
 ELSE a.keterangan
-END AS keterangan_a
+END AS keterangan_a,
+a.keterangan
 FROM absen A
 JOIN siswa s ON a.id_siswa = s.id_siswa
 JOIN vJadwal vJ ON a.id_jadwal = vJ.id_jadwal;
+
+CREATE OR REPLACE VIEW vJAdAbsen AS
+SELECT j.id_jadwal, m.nama_mapel, j.aktif FROM jadwal j 
+JOIN mapel m ON j.id_mapel = m.id_mapel WHERE j.id_hari = DAYOFWEEK(CURDATE());  

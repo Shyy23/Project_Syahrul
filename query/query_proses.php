@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+date_default_timezone_set('Asia/Jakarta');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $tabel = isset($_POST['tabel']) ? $_POST['tabel'] : '';
@@ -62,6 +63,53 @@ switch($tabel){
             echo "Harap isi semua field";
         }
         break;
+    case 'jadwal':
+        $id_hari = $_POST['hari'];
+        $id_guru = $_POST['guru'];
+        $id_kelas = $_POST['kelas'];
+        $id_mapel = $_POST['mapel'];
+        $jam_mulai = $_POST['jam_mulai'];
+        $jam_selesai = $_POST['jam_selesai'];
+
+        if($id_hari && $id_guru && $id_kelas && $id_mapel && $jam_mulai && $jam_selesai){
+
+            $sql_insert = "INSERT INTO jadwal (id_hari, id_guru, id_kelas, id_mapel, jam_mulai, jam_selesai) VALUES
+            (?,?,?,?,?,?)";
+
+            $stmt = $conn->prepare($sql_insert);
+            $stmt->bind_param("iiiiss", $id_hari, $id_guru, $id_kelas, $id_mapel, $jam_mulai, $jam_selesai);
+            if($stmt->execute()){
+                echo "Data Berhasil Ditambahkan";
+                header("Location:../table.php");
+            }else{
+                echo "Gagal Menambahkan Data";
+            }
+        }else{
+            echo "Harap isi semua field";
+        }
+        break;
+        case 'presensi':
+            $id_siswa = $_POST['siswa'];
+            $id_jadwal = $_POST['jadwal'];
+            $waktu = $_POST['waktu'];
+            $tanggal = $_POST['tanggal'];
+            $keterangan = $_POST['keterangan'];
+            
+            if($id_siswa && $id_jadwal && $waktu && $tanggal && $keterangan){
+                $sql_insert = "INSERT INTO absen (id_siswa, id_jadwal, waktu, tanggal, keterangan) VALUES 
+                (?,?,?,?,?)";
+
+                $stmt = $conn->prepare($sql_insert);
+                $stmt->bind_param("iisss", $id_siswa, $id_jadwal, $waktu, $tanggal, $keterangan);
+                if($stmt->execute()){
+                    echo "Data Berhasil Ditambahkan";
+                    header("Location:../table.php");
+                }else{
+                    echo "Gagal Menambahkan Data";
+                }
+            }else{
+                echo "Harap isi semua field";
+            }
 }
 }
 ?>

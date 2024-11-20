@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 10:20 PM
+-- Generation Time: Nov 20, 2024 at 11:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `abc`
+--
+
+CREATE TABLE `abc` (
+  `id_abc` int(10) NOT NULL,
+  `nama_abc` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `abc`
+--
+
+INSERT INTO `abc` (`id_abc`, `nama_abc`) VALUES
+(1, 'A'),
+(2, 'B'),
+(3, 'C');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `absen`
 --
 
@@ -33,7 +53,7 @@ CREATE TABLE `absen` (
   `id_jadwal` int(11) NOT NULL,
   `waktu` time NOT NULL,
   `tanggal` date NOT NULL,
-  `keterangan` enum('H','S','I','A') NOT NULL
+  `keterangan` enum('H','S','I','A','T') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -106,13 +126,13 @@ CREATE TABLE `hari` (
 --
 
 INSERT INTO `hari` (`id_hari`, `nama_hari`) VALUES
-(1, 'Senin'),
-(2, 'Selasa'),
-(3, 'Rabu'),
-(4, 'Kamis'),
-(5, 'Jumat'),
-(6, 'Sabtu'),
-(7, 'Minggu');
+(1, 'Minggu'),
+(2, 'Senin'),
+(3, 'Selasa'),
+(4, 'Rabu'),
+(5, 'Kamis'),
+(6, 'Jumat'),
+(7, 'Sabtu');
 
 -- --------------------------------------------------------
 
@@ -136,17 +156,45 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `id_hari`, `id_guru`, `id_kelas`, `id_mapel`, `jam_mulai`, `jam_selesai`, `aktif`) VALUES
-(1, 1, 1, 16, 2, '08:00:00', '11:00:00', 'tidak aktif'),
-(2, 1, 5, 16, 5, '12:30:00', '16:15:00', 'tidak aktif'),
-(3, 2, 1, 16, 2, '07:00:00', '09:30:00', 'tidak aktif'),
-(4, 2, 2, 16, 1, '10:00:00', '13:00:00', 'tidak aktif'),
-(5, 2, 3, 16, 4, '13:00:00', '16:15:00', 'tidak aktif'),
-(6, 3, 3, 16, 4, '07:00:00', '09:30:00', 'tidak aktif'),
-(7, 3, 4, 16, 3, '11:00:00', '16:15:00', 'tidak aktif'),
-(8, 4, 2, 16, 1, '07:00:00', '09:30:00', 'tidak aktif'),
-(9, 4, 4, 16, 3, '11:15:00', '16:15:00', 'tidak aktif'),
-(10, 5, 6, 16, 6, '07:00:00', '09:00:00', 'tidak aktif'),
-(11, 5, 5, 16, 5, '09:00:00', '11:30:00', 'tidak aktif');
+(1, 2, 1, 16, 2, '08:00:00', '11:00:00', 'tidak aktif'),
+(2, 2, 5, 16, 5, '12:30:00', '16:15:00', 'tidak aktif'),
+(3, 3, 1, 16, 2, '07:00:00', '09:30:00', 'tidak aktif'),
+(4, 3, 2, 16, 1, '10:00:00', '13:00:00', 'tidak aktif'),
+(5, 3, 3, 16, 4, '13:00:00', '16:15:00', 'tidak aktif'),
+(6, 4, 3, 16, 4, '07:00:00', '09:30:00', 'tidak aktif'),
+(7, 4, 4, 16, 3, '11:00:00', '16:15:00', 'tidak aktif'),
+(8, 5, 2, 16, 1, '07:00:00', '09:30:00', 'tidak aktif'),
+(9, 5, 4, 16, 3, '11:15:00', '16:15:00', 'tidak aktif'),
+(10, 6, 6, 16, 6, '07:00:00', '09:00:00', 'tidak aktif'),
+(11, 6, 5, 16, 5, '09:00:00', '11:30:00', 'tidak aktif'),
+(12, 2, 6, 1, 5, '06:12:00', '08:12:00', 'tidak aktif'),
+(13, 5, 5, 1, 5, '09:08:00', '10:08:00', 'tidak aktif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jurusan`
+--
+
+CREATE TABLE `jurusan` (
+  `id_jurusan` int(11) NOT NULL,
+  `nama_jurusan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jurusan`
+--
+
+INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
+(1, 'RPL'),
+(2, 'TJKT'),
+(3, 'AT'),
+(4, 'BR'),
+(5, 'TEI'),
+(6, 'TKI'),
+(7, 'AXIOO'),
+(8, 'ORACLE'),
+(9, 'GAMELAB');
 
 -- --------------------------------------------------------
 
@@ -157,44 +205,43 @@ INSERT INTO `jadwal` (`id_jadwal`, `id_hari`, `id_guru`, `id_kelas`, `id_mapel`,
 CREATE TABLE `kelas` (
   `id_kelas` int(10) NOT NULL,
   `tingkatan` enum('10','11','12') NOT NULL,
-  `jurusan` enum('RPL','TKJ','AT','TEI','BR','TKI','AXIOO','ORACLE','GAMELAB') NOT NULL,
-  `char` enum('A','B','C') NOT NULL
+  `id_jurusan` int(10) NOT NULL,
+  `id_abc` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id_kelas`, `tingkatan`, `jurusan`, `char`) VALUES
-(1, '10', 'RPL', 'A'),
-(2, '10', 'RPL', 'B'),
-(3, '10', 'TKJ', 'A'),
-(4, '10', 'TKJ', 'B'),
-(5, '10', 'AT', 'A'),
-(6, '10', 'AT', 'B'),
-(7, '10', 'TEI', 'A'),
-(8, '10', 'TEI', 'B'),
-(9, '10', 'BR', 'A'),
-(10, '10', 'BR', 'B'),
-(11, '10', 'TKI', 'A'),
-(12, '10', 'TKI', 'B'),
-(13, '10', 'TKI', 'C'),
-(14, '10', 'AXIOO', 'A'),
-(15, '10', 'GAMELAB', 'A'),
-(16, '11', 'RPL', 'A'),
-(17, '11', 'RPL', 'B'),
-(18, '11', 'TKJ', 'A'),
-(19, '11', 'TKJ', 'B'),
-(20, '11', 'AT', 'A'),
-(21, '11', 'AT', 'B'),
-(22, '11', 'AT', 'C'),
-(23, '11', 'TEI', 'A'),
-(24, '11', 'BR', 'A'),
-(25, '11', 'BR', 'B'),
-(26, '11', 'TKI', 'A'),
-(27, '11', 'TKI', 'B'),
-(28, '11', 'AXIOO', 'A'),
-(29, '11', 'ORACLE', 'A');
+INSERT INTO `kelas` (`id_kelas`, `tingkatan`, `id_jurusan`, `id_abc`) VALUES
+(1, '10', 1, 1),
+(2, '10', 1, 2),
+(3, '10', 2, 1),
+(4, '10', 2, 2),
+(5, '10', 3, 1),
+(6, '10', 3, 2),
+(7, '10', 4, 1),
+(8, '10', 4, 2),
+(9, '10', 5, 1),
+(10, '10', 5, 2),
+(11, '10', 6, 1),
+(12, '10', 6, 2),
+(13, '10', 6, 3),
+(14, '10', 7, 1),
+(15, '10', 9, 1),
+(16, '11', 1, 1),
+(17, '11', 1, 2),
+(18, '11', 2, 1),
+(19, '11', 2, 2),
+(20, '11', 3, 1),
+(21, '11', 3, 2),
+(22, '11', 4, 1),
+(23, '11', 4, 2),
+(24, '11', 5, 1),
+(25, '11', 6, 1),
+(26, '11', 6, 2),
+(27, '11', 7, 1),
+(28, '11', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -345,30 +392,31 @@ CREATE TABLE `user` (
   `user_type` enum('siswa','guru') NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('admin','user') NOT NULL
+  `role` enum('admin','user') NOT NULL,
+  `status` enum('aktif','tidak_aktif') DEFAULT 'tidak_aktif'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `id_user_guru`, `id_user_siswa`, `user_type`, `username`, `password`, `role`) VALUES
-(1, NULL, 33, 'siswa', '0074095293', '$2y$10$3dNAagmT.OPQritIApgoIOdLV5Bx/0/4u3m/9qBMFNeF1Pjkj7DSm', 'user'),
-(3, NULL, 19, 'siswa', '0089558937', '$2y$10$smHVUMbFLbiOrYUHp1qgx.egEKtdMg0jSPRVwk.oXu2da9.xTv4O6', 'user'),
-(4, NULL, 24, 'siswa', '0082206618', '$2y$10$AeIWxKYwQ7Rt6IpUgneyXOSHNt9UhoyOGNjwiSyqPTn3o070P3.je', 'user'),
-(5, NULL, 23, 'siswa', '3072081858', '$2y$10$YqJJU0gRzfJomXLXMRdnOuFQPf/G9nrI0/aDTK5YhP.P8RsPJIHqq', 'user'),
-(6, NULL, 26, 'siswa', '0074670066', '$2y$10$fI8DlSGy3sLzOGf33roEGueuBwcB5BGSRWDRYVIEVXP0/0Qu.D176', 'user'),
-(7, NULL, 1, 'siswa', '0087973618', '$2y$10$JvTkYV/Yu0BCM6yOC70R5.wEhiOOCD6tB7KY0afxukVddqtxNtAjC', 'user'),
-(8, NULL, 2, 'siswa', '3080796611', '$2y$10$u2z6.Mc3vcaDOu8V8vM3CuJbUjEg60CKOPYhpaqI7KMLu5tCqwgYe', 'user'),
-(9, NULL, 22, 'siswa', '0085492139', '$2y$10$JsUrXtHDuQuOHR5Pm81zXOT0B7sX3rExC42NhJ1imqlpX2GZueIfS', 'user'),
-(10, NULL, 9, 'siswa', '0081072427', '$2y$10$Ie7pIpj6DsaYwQmj1e8LQODqa7RGeXnlSGe7doaxrcz.IY6rxXxLS', 'user'),
-(11, NULL, 29, 'siswa', '0084567854', '$2y$10$cBw13AWtDcJetnDY/YLb6eRuzS0E6xsMlgeLAb9Rvxm.rk8i1OjJK', 'user'),
-(12, NULL, 17, 'siswa', '0086319870', '$2y$10$KhrRsfr2fLXKeIANuMkqpeL11tlUfa5Yju8W53jnIGxHHYFt9CoRy', 'user'),
-(13, NULL, 10, 'siswa', '0074849562', '$2y$10$wlFJ.SwBbQb8EmUT.j7s6O.KDoWmrVF1gec89r5KAB8MtaT15/uri', 'user'),
-(14, NULL, 6, 'siswa', '0085126248', '$2y$10$LyvHV9zgOjmq07gEtML/ceotq0Etsxjy9iv8Q9x8/9buhw99IEp5C', 'user'),
-(15, NULL, 3, 'siswa', '0077301269', '$2y$10$yFHEAGpk/VtU9IIZPdznweM/LW4KXEzqWwuyAAYBvBtNm6ujDTB8q', 'user'),
-(16, NULL, 34, 'siswa', '0071774203', '$2y$10$B69/36TAROw6yotgFzhWU.VF3c.yqCjkpNcKlI.jOJlgbF2LHsCkm', 'user'),
-(17, NULL, 37, 'siswa', '123456', '$2y$10$iZKEF8MRy7ULJ9bAEsU29ednt8wII1yZVtZbDOTLVa77/QMN9Huq.', 'user');
+INSERT INTO `user` (`id_user`, `id_user_guru`, `id_user_siswa`, `user_type`, `username`, `password`, `role`, `status`) VALUES
+(1, NULL, 33, 'siswa', '0074095293', '$2y$10$3dNAagmT.OPQritIApgoIOdLV5Bx/0/4u3m/9qBMFNeF1Pjkj7DSm', 'user', 'tidak_aktif'),
+(3, NULL, 19, 'siswa', '0089558937', '$2y$10$smHVUMbFLbiOrYUHp1qgx.egEKtdMg0jSPRVwk.oXu2da9.xTv4O6', 'user', 'tidak_aktif'),
+(4, NULL, 24, 'siswa', '0082206618', '$2y$10$AeIWxKYwQ7Rt6IpUgneyXOSHNt9UhoyOGNjwiSyqPTn3o070P3.je', 'user', 'tidak_aktif'),
+(5, NULL, 23, 'siswa', '3072081858', '$2y$10$YqJJU0gRzfJomXLXMRdnOuFQPf/G9nrI0/aDTK5YhP.P8RsPJIHqq', 'user', 'tidak_aktif'),
+(6, NULL, 26, 'siswa', '0074670066', '$2y$10$fI8DlSGy3sLzOGf33roEGueuBwcB5BGSRWDRYVIEVXP0/0Qu.D176', 'user', 'tidak_aktif'),
+(7, NULL, 1, 'siswa', '0087973618', '$2y$10$JvTkYV/Yu0BCM6yOC70R5.wEhiOOCD6tB7KY0afxukVddqtxNtAjC', 'user', 'tidak_aktif'),
+(8, NULL, 2, 'siswa', '3080796611', '$2y$10$u2z6.Mc3vcaDOu8V8vM3CuJbUjEg60CKOPYhpaqI7KMLu5tCqwgYe', 'user', 'tidak_aktif'),
+(9, NULL, 22, 'siswa', '0085492139', '$2y$10$JsUrXtHDuQuOHR5Pm81zXOT0B7sX3rExC42NhJ1imqlpX2GZueIfS', 'user', 'tidak_aktif'),
+(10, NULL, 9, 'siswa', '0081072427', '$2y$10$Ie7pIpj6DsaYwQmj1e8LQODqa7RGeXnlSGe7doaxrcz.IY6rxXxLS', 'user', 'tidak_aktif'),
+(11, NULL, 29, 'siswa', '0084567854', '$2y$10$cBw13AWtDcJetnDY/YLb6eRuzS0E6xsMlgeLAb9Rvxm.rk8i1OjJK', 'user', 'tidak_aktif'),
+(12, NULL, 17, 'siswa', '0086319870', '$2y$10$KhrRsfr2fLXKeIANuMkqpeL11tlUfa5Yju8W53jnIGxHHYFt9CoRy', 'user', 'tidak_aktif'),
+(13, NULL, 10, 'siswa', '0074849562', '$2y$10$wlFJ.SwBbQb8EmUT.j7s6O.KDoWmrVF1gec89r5KAB8MtaT15/uri', 'user', 'tidak_aktif'),
+(14, NULL, 6, 'siswa', '0085126248', '$2y$10$LyvHV9zgOjmq07gEtML/ceotq0Etsxjy9iv8Q9x8/9buhw99IEp5C', 'user', 'tidak_aktif'),
+(15, NULL, 3, 'siswa', '0077301269', '$2y$10$yFHEAGpk/VtU9IIZPdznweM/LW4KXEzqWwuyAAYBvBtNm6ujDTB8q', 'user', 'tidak_aktif'),
+(16, NULL, 34, 'siswa', '0071774203', '$2y$10$B69/36TAROw6yotgFzhWU.VF3c.yqCjkpNcKlI.jOJlgbF2LHsCkm', 'user', 'tidak_aktif'),
+(17, NULL, 37, 'siswa', '123456', '$2y$10$iZKEF8MRy7ULJ9bAEsU29ednt8wII1yZVtZbDOTLVa77/QMN9Huq.', 'user', 'tidak_aktif');
 
 --
 -- Triggers `user`
@@ -396,9 +444,167 @@ END
 $$
 DELIMITER ;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vabsen`
+-- (See below for the actual view)
+--
+CREATE TABLE `vabsen` (
+`id_absen` int(10)
+,`id_siswa` int(11)
+,`id_jadwal` int(11)
+,`nama_siswa_a` varchar(100)
+,`nama_mapel_a` varchar(100)
+,`waktu` time
+,`tanggal` date
+,`keterangan_a` varchar(9)
+,`keterangan` enum('H','S','I','A','T')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vguru`
+-- (See below for the actual view)
+--
+CREATE TABLE `vguru` (
+`id_guru` int(10)
+,`nip` varchar(35)
+,`nama_guru_g` varchar(100)
+,`id_mapel` int(11)
+,`jenis_kelamin` varchar(9)
+,`nama_mapel_g` varchar(100)
+,`alamat_guru_g` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vjadabsen`
+-- (See below for the actual view)
+--
+CREATE TABLE `vjadabsen` (
+`id_jadwal` int(11)
+,`aktif` enum('aktif','tidak aktif')
+,`nama_mapel` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vjadwal`
+-- (See below for the actual view)
+--
+CREATE TABLE `vjadwal` (
+`id_jadwal` int(11)
+,`id_hari` int(11)
+,`id_guru` int(11)
+,`id_kelas` int(11)
+,`id_mapel` int(11)
+,`jam_mulai` time
+,`jam_selesai` time
+,`aktif` enum('aktif','tidak aktif')
+,`nama_hari_j` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu')
+,`nama_guru_j` varchar(100)
+,`nama_kelas_j` varchar(115)
+,`nama_mapel_j` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vkelas`
+-- (See below for the actual view)
+--
+CREATE TABLE `vkelas` (
+`id_kelas` int(10)
+,`tingkatan` enum('10','11','12')
+,`nama_jurusan` varchar(100)
+,`nama_abc` varchar(10)
+,`nama_kelas` varchar(115)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vsiswa`
+-- (See below for the actual view)
+--
+CREATE TABLE `vsiswa` (
+`id_siswa` int(10)
+,`nisn` varchar(10)
+,`nama` varchar(100)
+,`id_kelas` int(5)
+,`jenis_kelamin` varchar(9)
+,`alamat` text
+,`nama_kelas_s` varchar(115)
+,`no_telepon` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vabsen`
+--
+DROP TABLE IF EXISTS `vabsen`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vabsen`  AS SELECT `a`.`id_absen` AS `id_absen`, `a`.`id_siswa` AS `id_siswa`, `a`.`id_jadwal` AS `id_jadwal`, `s`.`nama` AS `nama_siswa_a`, `vj`.`nama_mapel_j` AS `nama_mapel_a`, `a`.`waktu` AS `waktu`, `a`.`tanggal` AS `tanggal`, CASE `a`.`keterangan` WHEN 'H' THEN 'Hadir' WHEN 'S' THEN 'Sakit' WHEN 'I' THEN 'Izin' WHEN 'A' THEN 'Alfa' WHEN 'T' THEN 'Terlambat' ELSE `a`.`keterangan` END AS `keterangan_a`, `a`.`keterangan` AS `keterangan` FROM ((`absen` `a` join `siswa` `s` on(`a`.`id_siswa` = `s`.`id_siswa`)) join `vjadwal` `vj` on(`a`.`id_jadwal` = `vj`.`id_jadwal`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vguru`
+--
+DROP TABLE IF EXISTS `vguru`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vguru`  AS SELECT `g`.`id_guru` AS `id_guru`, `g`.`nip` AS `nip`, `g`.`nama` AS `nama_guru_g`, `g`.`id_mapel` AS `id_mapel`, CASE `g`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `g`.`jenis_kelamin` END AS `jenis_kelamin`, `m`.`nama_mapel` AS `nama_mapel_g`, `g`.`alamat` AS `alamat_guru_g` FROM (`guru` `g` join `mapel` `m` on(`g`.`id_mapel` = `m`.`id_mapel`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vjadabsen`
+--
+DROP TABLE IF EXISTS `vjadabsen`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vjadabsen`  AS SELECT `j`.`id_jadwal` AS `id_jadwal`, `j`.`aktif` AS `aktif`, `m`.`nama_mapel` AS `nama_mapel` FROM (`jadwal` `j` join `mapel` `m` on(`j`.`id_mapel` = `m`.`id_mapel`)) WHERE `j`.`id_hari` = dayofweek(curdate()) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vjadwal`
+--
+DROP TABLE IF EXISTS `vjadwal`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vjadwal`  AS SELECT `j`.`id_jadwal` AS `id_jadwal`, `j`.`id_hari` AS `id_hari`, `j`.`id_guru` AS `id_guru`, `j`.`id_kelas` AS `id_kelas`, `j`.`id_mapel` AS `id_mapel`, `j`.`jam_mulai` AS `jam_mulai`, `j`.`jam_selesai` AS `jam_selesai`, `j`.`aktif` AS `aktif`, `h`.`nama_hari` AS `nama_hari_j`, `g`.`nama` AS `nama_guru_j`, `vk`.`nama_kelas` AS `nama_kelas_j`, `m`.`nama_mapel` AS `nama_mapel_j` FROM ((((`jadwal` `j` join `hari` `h` on(`j`.`id_hari` = `h`.`id_hari`)) join `guru` `g` on(`j`.`id_guru` = `g`.`id_guru`)) join `vkelas` `vk` on(`j`.`id_kelas` = `vk`.`id_kelas`)) join `mapel` `m` on(`j`.`id_mapel` = `m`.`id_mapel`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vkelas`
+--
+DROP TABLE IF EXISTS `vkelas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vkelas`  AS SELECT `k`.`id_kelas` AS `id_kelas`, `k`.`tingkatan` AS `tingkatan`, `j`.`nama_jurusan` AS `nama_jurusan`, `abc`.`nama_abc` AS `nama_abc`, concat(case `k`.`tingkatan` when '10' then 'X' when '11' then 'XI' when '12' then 'XII' else `k`.`tingkatan` end,' ',`j`.`nama_jurusan`,' ',`abc`.`nama_abc`) AS `nama_kelas` FROM ((`kelas` `k` join `jurusan` `j` on(`k`.`id_jurusan` = `j`.`id_jurusan`)) join `abc` on(`k`.`id_abc` = `abc`.`id_abc`)) ORDER BY `k`.`id_kelas` ASC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vsiswa`
+--
+DROP TABLE IF EXISTS `vsiswa`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsiswa`  AS SELECT `s`.`id_siswa` AS `id_siswa`, `s`.`nisn` AS `nisn`, `s`.`nama` AS `nama`, `s`.`id_kelas` AS `id_kelas`, CASE `s`.`jenis_kelamin` WHEN 'L' THEN 'Laki-Laki' WHEN 'P' THEN 'Perempuan' ELSE `s`.`jenis_kelamin` END AS `jenis_kelamin`, `s`.`alamat` AS `alamat`, `vk`.`nama_kelas` AS `nama_kelas_s`, `s`.`no_telepon` AS `no_telepon` FROM (`siswa` `s` join `vkelas` `vk` on(`s`.`id_kelas` = `vk`.`id_kelas`)) ;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `abc`
+--
+ALTER TABLE `abc`
+  ADD PRIMARY KEY (`id_abc`);
 
 --
 -- Indexes for table `absen`
@@ -435,10 +641,18 @@ ALTER TABLE `jadwal`
   ADD KEY `fk_mapel` (`id_mapel`);
 
 --
+-- Indexes for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  ADD PRIMARY KEY (`id_jurusan`);
+
+--
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`id_kelas`);
+  ADD PRIMARY KEY (`id_kelas`),
+  ADD KEY `idx_jurusan` (`id_jurusan`),
+  ADD KEY `idx_abc` (`id_abc`);
 
 --
 -- Indexes for table `mapel`
@@ -492,6 +706,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `abc`
+--
+ALTER TABLE `abc`
+  MODIFY `id_abc` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
@@ -507,19 +727,25 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `hari`
 --
 ALTER TABLE `hari`
-  MODIFY `id_hari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_hari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_kelas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `mapel`
@@ -572,6 +798,13 @@ ALTER TABLE `jadwal`
   ADD CONSTRAINT `fk_mapel` FOREIGN KEY (`id_mapel`) REFERENCES `mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `fk_abc` FOREIGN KEY (`id_abc`) REFERENCES `abc` (`id_abc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_jurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `role_permissions`
 --
 ALTER TABLE `role_permissions`
@@ -615,6 +848,10 @@ CREATE DEFINER=`root`@`localhost` EVENT `update_jadwal_aktif` ON SCHEDULE EVERY 
              ) THEN 'aktif'
         ELSE 'tidak aktif'
     END;
+END$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `reset_user_status` ON SCHEDULE EVERY 1 DAY STARTS '2024-11-13 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+	UPDATE `user` SET `status` = 'tidak_aktif';
 END$$
 
 DELIMITER ;
