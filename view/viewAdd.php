@@ -40,7 +40,7 @@ include '../query/query_add.php';
                 </div>
             <?php elseif($field['type'] === 'time'):?>
                 <div class="wrapper">
-                    <input type="<?= $field['type']?>" class="input input-jam" name="<?= $name?>" id="<?= $name?>" required>
+                    <input type="time" class="input input-jam" name="<?= $name?>" id="<?= $name?>" required>
                     <label for="<?= $name?>" class="info info-jam waktu stacked"><?= $field['label']?></label>
                 </div>
             <?php else:?>
