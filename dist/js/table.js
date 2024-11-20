@@ -4,10 +4,10 @@ const line = document.querySelector('.line');
 const addButton = document.getElementById('addButton');
 
 const tabData = [
-    {name:'Siswa', href:'query_add.php?tabel=siswa'},
-    {name:'Guru', href:'query_add.php?tabel=guru'},
-    {name:'Jadwal', href:'query_add.php?tabel=jadwal'},
-    {name:'Presensi', href:'query_add.php?tabel=presensi'},
+    {name:'Siswa', href:'view/viewAdd.php?tabel=siswa'},
+    {name:'Guru', href:'view/viewAdd.php?tabel=guru'},
+    {name:'Jadwal', href:'view/viewAdd.php?tabel=jadwal'},
+    {name:'Presensi', href:'view/viewAdd.php?tabel=presensi'},
 ]
 
 function updateLinePosition(activeTab){

@@ -2,7 +2,7 @@
 // Koneksi ke database
 include '../koneksi.php';
 
-echo '<link rel="stylesheet" href="../dist/css/edit.css?v='.time().'">';
+echo '<link rel="stylesheet" href="../dist/css/crud.css?v='.time().'">';
 // Ambil parameter tabel dan id dari URL
 $tabel = $_GET['tabel'];
 

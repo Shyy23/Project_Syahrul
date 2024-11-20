@@ -935,6 +935,7 @@ body{
     justify-content: center;
     align-items: center;
     gap: .5rem;
+    grid-template-rows: 7rem 7rem;
 }
 
 .wrapper{
@@ -1056,6 +1057,12 @@ body{
     gap: 1rem;
 }
 
+.wrapper__jam{
+    justify-content: space-between;
+}
+.wrapper__ginput{
+    gap: 3rem;
+}
 .center{
     display: grid;
     justify-content: center;
@@ -1067,8 +1074,44 @@ body{
     justify-self: center;
 }
 
+.content__ginput{
+    width: 10rem;
+}
 .content__ginput .input,
 .content__ginput .select{
     width: min(100%, 10rem);
+}
+
+/* ADD  */
+
+.form__add{
+    width: min(95vw, 80rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    place-items: center;
+}
+
+.add{
+    width: 15rem;
+}
+.add__select{
+    width: 17rem;
+}
+.btn__add{
+    width: 13rem;
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 8px transparent
+    inset 2px 2px 8px white;
+}
+
+.btn__add:hover{
+    box-shadow: inset 1px 1px 4px var(--white-color),
+                2px 2px 4px var(--first-color) ;
+
 }
 
