@@ -1,6 +1,18 @@
 <?php
+session_start();
 include "koneksi.php";
 include "query/query.php";
+
+if (isset($_SESSION['message'])) {
+    echo "
+    <div id='alert' class='alert'>
+        <span class='closebtn' onclick=\"this.parentElement.style.display='none';\">&times;</span> 
+        {$_SESSION['message']}
+    </div>";
+    unset($_SESSION['message']); // Hapus pesan setelah ditampilkan
+}
+
+
 
 
 ?>
@@ -192,7 +204,7 @@ include "query/query.php";
                                                 echo "<a class='edit__btn btn' href='query/query_edit.php?tabel=siswa&siswa_id=". $row['id_siswa'] ."'>EDIT</a>";
                                                 echo "</td>";
                                                 echo "<td class='table__data'>";
-                                                echo "<a class='delete__btn btn' href='crud/delete.php?tabel=siswa&siswa_id=". $row['id_siswa'] ."'>DELETE</a>";                                       
+                                                echo "<a class='delete__btn btn' href='query/query_delete.php?tabel=siswa&id=". $row['id_siswa'] ."'>DELETE</a>";                                       
                                                 echo "</td>";
                                                 echo '</tr>';
                                             }
@@ -237,7 +249,7 @@ include "query/query.php";
                                         echo "<a class='edit__btn btn' href='query/query_edit.php?tabel=guru&guru_id=". $row['id_guru'] ."'>EDIT</a>";
                                         echo "</td>";
                                         echo "<td class='table__data'>";
-                                        echo "<a class='delete__btn btn' href='crud/delete.php?tabel=guru&guru_id=". $row['id_guru'] ."'>DELETE</a>";                                       
+                                        echo "<a class='delete__btn btn' href='query/query_delete.php?tabel=guru&id=". $row['id_guru'] ."'>DELETE</a>";                                       
                                         echo "</td>";
                                         echo '</tr>';
                                     }
@@ -284,7 +296,7 @@ include "query/query.php";
                                         echo "<a class='edit__btn btn' href='query/query_edit.php?tabel=jadwal&jadwal_id=". $row['id_jadwal'] ."'>EDIT</a>";
                                         echo "</td>";
                                         echo "<td class='table__data'>";
-                                        echo "<a class='delete__btn btn' href='crud/delete.php?tabel=jadwal&jadwal_id=". $row['id_jadwal'] ."'>DELETE</a>";                                       
+                                        echo "<a class='delete__btn btn' href='query/query_delete.php?tabel=jadwal&id=". $row['id_jadwal'] ."'>DELETE</a>";                                       
                                         echo "</td>";
                                         echo '</tr>';
                                         }
@@ -328,7 +340,7 @@ include "query/query.php";
                                                
                                                 echo "</td>";
                                                 echo "<td class='table__data'>";
-                                                echo "<a class='delete__btn btn' href='crud/delete.php?tabel=absen&absen_id=". $row['id_absen'] ."'>DELETE</a>";
+                                                echo "<a class='delete__btn btn' href='query/query_delete.php?tabel=absen&id=". $row['id_absen'] ."'>DELETE</a>";
                                                
                                                 echo "</td>";
                                                 echo '</tr>';

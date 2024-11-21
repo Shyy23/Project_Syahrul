@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include '../koneksi.php';
 date_default_timezone_set('Asia/Jakarta');
 
@@ -26,10 +28,10 @@ switch($tabel){
             $stmt->bind_param("ssssiss", $nisn, $nama, $jenis_kelamin, $alamat, $id_kelas, $no_telepon, $hashed_password);
 
             if($stmt->execute()){
-                echo "Data Berhasil Ditambahkan";
+                   $_SESSION['message'] = "Data berhasil ditambahkan.";
                 header("Location: ../table.php");
             } else {
-                echo "Gagal Menambahkan Data";
+                $_SESSION['message'] = "Gagal menambahkan data.";
             }
         } else {
             echo "Harap isi semua field";
@@ -47,17 +49,18 @@ switch($tabel){
 
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql_insert = "INSERT INTO guru (nip, nama, jenis_kelamin, id_mapel, alamat, `password` VALUES
+            $sql_insert = "INSERT INTO guru (nip, nama, jenis_kelamin, id_mapel, alamat, `password`) VALUES
             (?,?,?,?,?,?)";
 
             $stmt = $conn->prepare($sql_insert);
             $stmt->bind_param("sssiss", $nip, $nama, $jenis_kelamin, $id_mapel, $alamat, $hashed_password);
 
             if($stmt->execute()){
-                echo "Data Berhasil Ditambahkan";
+                $_SESSION['message'] = "Data berhasil ditambahkan.";
                 header("Location:../table.php");
+                exit;
             } else {
-                echo "Gagal Menambahkan Data";
+                $_SESSION['message'] = "Gagal menambahkan data.";
             }
         } else {
             echo "Harap isi semua field";
@@ -79,10 +82,11 @@ switch($tabel){
             $stmt = $conn->prepare($sql_insert);
             $stmt->bind_param("iiiiss", $id_hari, $id_guru, $id_kelas, $id_mapel, $jam_mulai, $jam_selesai);
             if($stmt->execute()){
-                echo "Data Berhasil Ditambahkan";
+                   $_SESSION['message'] = "Data berhasil ditambahkan.";
                 header("Location:../table.php");
+                exit;
             }else{
-                echo "Gagal Menambahkan Data";
+                $_SESSION['message'] = "Gagal menambahkan data.";
             }
         }else{
             echo "Harap isi semua field";
@@ -102,10 +106,11 @@ switch($tabel){
                 $stmt = $conn->prepare($sql_insert);
                 $stmt->bind_param("iisss", $id_siswa, $id_jadwal, $waktu, $tanggal, $keterangan);
                 if($stmt->execute()){
-                    echo "Data Berhasil Ditambahkan";
+                       $_SESSION['message'] = "Data berhasil ditambahkan.";
                     header("Location:../table.php");
+                    exit;
                 }else{
-                    echo "Gagal Menambahkan Data";
+                    $_SESSION['message'] = "Gagal menambahkan data.";
                 }
             }else{
                 echo "Harap isi semua field";

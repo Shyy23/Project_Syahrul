@@ -234,19 +234,22 @@ switch ($tabel) {
                 $data = $result->fetch_assoc();
 
                 $form .= '<h2 class="judul">Edit Presensi Siswa</h2>';
-                $form .= '<form class="form_container  center" method="POST" action="">';
+                $form .= '<form class="form_container  center" method="POST" action="query_update.php">';
                 $form .= '<input type="hidden" class="input" name="id_absen" value="'.$data['id_absen'].'" readonly>';
                 
+                // nama siswa
                 $form .= '<div class="wrapper acenter">';
                 $form .= '<input class="input read" type="text" name="nama_siswa" id="nama_siswa" value="'.$data['nama_siswa_a'].'" readonly>';
                 $form .= '<label class="info info-read stacked" for="nama_siswa">Nama Siswa</label>';
                 $form .= '</div>';
 
+                // mapel
                 $form .= '<div class="wrapper wrapper__ginput">';
                 $form .= '<div class="content__ginput">';
                 $form .= '<input class="input read" type="text" name="mapel" id="mapel" value="'.$data['nama_mapel_a'].'" readonly>';
                 $form .= '<label class="info info-read stacked" for="mapel">Mapel</label>';
                 
+                // keterangan
                 $form .= '</div>';
                 $form .= '<div class="content__ginput">';
                 $form .= '<label class="info info-select stacked" for="keterangan">Keterangan</label>';

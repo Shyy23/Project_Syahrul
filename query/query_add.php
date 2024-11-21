@@ -127,7 +127,7 @@ case 'siswa':
 case 'guru':
     $formFields = [
         'nip' => ['label' => 'NIP', 'type' => 'text'],
-        'nama_guru' => ['label' => 'Nama Siswa', 'type' => 'text'],
+        'nama_guru' => ['label' => 'Nama Guru', 'type' => 'text'],
         'jenis_kelamin' => ['label' => 'Jenis Kelamin', 'type' => 'select', 'options' => ['L' => 'Laki Laki', 'P' => 'Perempuan']],
         'mapel' => ['label' => 'Mapel', 'type' => 'select', 'options' => $mapel_data],
         'alamat' => ['label' => 'Alamat', 'type' => 'text'],

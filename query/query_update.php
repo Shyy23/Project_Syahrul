@@ -1,5 +1,7 @@
 <?php
+session_start();
 include '../koneksi.php';
+date_default_timezone_set('Asia/Jakarta');
 
 if($_SERVER["REQUEST_METHOD"]== "POST"){
     if(isset($_POST['id_siswa'])){
@@ -15,10 +17,11 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
         if($stmt = $conn->prepare($query)){
             $stmt->bind_param("ssisi", $nama_siswa, $jenis_kelamin, $id_kelas, $alamat, $id_siswa);
             if($stmt->execute()){
-                echo "Data Berhasil Diperbarui!!";
+                $_SESSION['message'] = "Data Berhasil diedit";
                 header("Location: ../table.php");
+                exit;
             } else {
-                echo "Gagal Memperbarui Data";
+                $_SESSION['message'] = "Gagal Memperbarui Data";
             }
         }
     } else if(isset($_POST['id_guru'])){
@@ -34,10 +37,11 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
         if($stmt = $conn->prepare($query)){
             $stmt->bind_param("ssisi", $nama_guru, $jenis_kelamin, $id_mapel, $alamat, $id_guru);
             if($stmt->execute()){
-                echo "Data Berhasil Diperbarui!!";
+                $_SESSION['message'] = "Data Berhasil diedit";
                 header("Location:../table.php");
+                exit;
             } else{
-                echo "Gagal Memperbarui Data";
+                $_SESSION['message'] = "Gagal Memperbarui Data";
             }
     }
 } else if(isset($_POST['id_jadwal'])){
@@ -49,21 +53,47 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
     $id_mapel = $_POST['mapel'];
     $jam_mulai = $_POST['jam_mulai'];
     $jam_selesai = $_POST['jam_selesai'];
+    
 
     $query = "UPDATE jadwal SET id_hari = ?, id_guru = ?, id_kelas = ?, id_mapel = ?, jam_mulai = ?, jam_selesai = ? WHERE id_jadwal = ?";
     if($stmt = $conn->prepare($query)){
         $stmt->bind_param("iiiissi", $id_hari, $id_guru, $id_kelas, $id_mapel, $jam_mulai, $jam_selesai, $id_jadwal);
         if($stmt->execute()){
-            echo "Data Berhasil Diperbarui";
+            $_SESSION['message'] = "Data Berhasil diedit";
             header("Location:../table.php");
+            exit;
         } else {
-            echo "Gagal Memperbarui Data";
+            $_SESSION['message'] = "Gagal Memperbarui Data";
         }
     }
 } else if(isset($_POST['id_absen'])){
     // Ambil data
     $id_absen = $_POST['id_absen'];
     $keterangan = $_POST['keterangan'];
+    $waktu = date('H:i');
+    $tanggal = date('Y-m-d');
+
+    echo "ID Absen: $id_absen <br>";
+    echo "Keterangan: $keterangan <br>";
+    echo "Waktu: $waktu <br>";
+    echo "Tanggal: $tanggal <br>";
+
+    $query = "UPDATE absen SET keterangan = ?, waktu = ?, tanggal = ? WHERE id_absen = ?";
+    if($stmt = $conn->prepare($query)){
+        $stmt->bind_param("sssi", $keterangan, $waktu, $tanggal, $id_absen);
+        if($stmt->execute()){
+            $_SESSION['message'] = "Data Berhasil diedit";
+            header("Location: ../table.php");
+            die();
+
+        } else{
+            echo "Execute Error: " . $stmt->error;
+            $_SESSION['message'] = "Gagal Memperbarui Data";
+        }
+    } else {
+        $_SESSION['message'] = "Query Error: " . $conn->error;
+    }
+    
 }  
 } else {
     echo "Data Tidak terkirim";

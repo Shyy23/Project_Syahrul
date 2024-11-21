@@ -63,3 +63,24 @@ function searchTable(){
         visible_row.style.backgroundColor = (i % 2 == 0)? 'transparent' : ' hsl(0, 0%, 70%)';
     });
 }
+
+window.onload = function() {
+    var alertBox = document.getElementById('alert');
+    if (alertBox) {
+        alertBox.classList.add('show'); // Tambahkan kelas 'show' untuk memunculkan alert
+        setTimeout(function() {
+            alertBox.style.display = 'none'; // Sembunyikan setelah 5 detik
+        }, 5000);
+    }
+};
+
+document.querySelectorAll('.delete__btn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        // Munculkan konfirmasi
+        const confirmed = confirm('Apakah Anda yakin ingin menghapus data ini?');
+        if (!confirmed) {
+            // Jika batal, cegah aksi default (navigasi ke link)
+            event.preventDefault();
+        }
+    });
+});
